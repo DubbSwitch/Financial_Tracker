@@ -1,4 +1,5 @@
-# OOP_Lab_Final_2021
+#Final Lab - Budgeting Application
+##Object Oriented Programming (CSC150) - Winter 2021
 
 <p>Project Owners:</p>
 <ul>
