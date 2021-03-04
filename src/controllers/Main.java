@@ -3,6 +3,10 @@ package controllers;
 public class Main {
 
     public static void main(String[] args) {
-	// write your code here
+	run();
+    }
+
+    public static void run() {
+
     }
 }
