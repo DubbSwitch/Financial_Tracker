@@ -4,10 +4,10 @@
   <element>
     <id>UMLPackage</id>
     <coordinates>
-      <x>128</x>
-      <y>208</y>
+      <x>784</x>
+      <y>160</y>
       <w>488</w>
-      <h>440</h>
+      <h>608</h>
     </coordinates>
     <panel_attributes>Controller
 --
@@ -17,8 +17,8 @@ bg=blue</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>304</x>
-      <y>232</y>
+      <x>960</x>
+      <y>184</y>
       <w>88</w>
       <h>56</h>
     </coordinates>
@@ -32,10 +32,10 @@ run();</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>928</x>
-      <y>152</y>
+      <x>1584</x>
+      <y>104</y>
       <w>552</w>
-      <h>312</h>
+      <h>408</h>
     </coordinates>
     <panel_attributes>User
 -
@@ -45,7 +45,11 @@ run();</panel_attributes>
 -password : String
 -secQuestion : String
 -secAnswer : String
+-savings : double
+-loginAttempts : int = 5
 -
++getLoginAttempts() : int
++setLoginAttempts(attempts : int) void
 +getDisplayName() : String
 +setDisplayName(name : String) : void
 +getUserName() : String
@@ -67,8 +71,8 @@ run();</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>704</x>
-      <y>152</y>
+      <x>1360</x>
+      <y>104</y>
       <w>200</w>
       <h>168</h>
     </coordinates>
@@ -82,7 +86,7 @@ run();</panel_attributes>
 +withdraw(amount : double) : double
 
 +setName(name : String)  : void
-+getName() : String 
++getFunds() : double
 +toString() : String &lt;&lt;override&gt;&gt;
 +Budget(funds : double, name : String)</panel_attributes>
     <additional_attributes/>
@@ -90,8 +94,8 @@ run();</panel_attributes>
   <element>
     <id>UMLPackage</id>
     <coordinates>
-      <x>664</x>
-      <y>104</y>
+      <x>1288</x>
+      <y>64</y>
       <w>848</w>
       <h>544</h>
     </coordinates>
@@ -103,15 +107,16 @@ bg=green</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>176</x>
-      <y>296</y>
+      <x>808</x>
+      <y>248</y>
       <w>392</w>
-      <h>344</h>
+      <h>512</h>
     </coordinates>
-    <panel_attributes>MCBudgetController
+    <panel_attributes>MCBudgeting
 -
 _-users : ArrayList&lt;User&gt;_
-_-passwordLimit : int = 5_ ( optional )
+
+
 -
 _+run() : void_
 _-homeMenu() : int_
@@ -123,34 +128,56 @@ _-resetPassword(userName : String) : void_
 
 _-userMenu() : int_
 _-userSwitch(choice : int) : void_
+_-logout() : void_
 
 _-budgetingMenu() : int_
 _-budgetingSwitch(choice : int) : void_
+_-createBudget(funds : double, name : String) : void_
+
+_-savingsMenu() : int_
+_-modifySavings(amount : double, choice : int) : void_
+
 
 _-budgetSelectionMenu() : int_
 _-budgetSelectionSwitch(choice :int) : void_
+_-modifyBudgetMenu() : void_
+_-viewTransactionHistory(budget : Budget)  : void_
+_-deleteBudget(budget : Budget) : void_
+_-renameBudget(budget : Budget, newName : String) : void_
+
 
 _-accountSettingsMenu() : int_
 _-accountSettingsSwitch(choice : int) : void_
-</panel_attributes>
+_-changeDisplayName(newName : String) : void_
+_-changePassword(newPass : String) : void_
+_-changeSecQnA(question : String, answer :String) : void_
+
+layer=1</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>688</x>
-      <y>328</y>
-      <w>80</w>
-      <h>24</h>
+      <x>256</x>
+      <y>264</y>
+      <w>384</w>
+      <h>104</h>
     </coordinates>
-    <panel_attributes>ConsoleIO</panel_attributes>
+    <panel_attributes>ConsoleIO
+-
+
+-
+_+promptForString(prompt : String, allowBlank : boolean) : String_
+_+promptForInt(prompt : String, min : int, max : int) : int_
+_+promptForBoolean(prompt : String, trueString : String, falseString : String) : boolean_
+_+promptForMenu(menu : String[]) : </panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Text</id>
     <coordinates>
-      <x>424</x>
-      <y>416</y>
+      <x>1080</x>
+      <y>368</y>
       <w>232</w>
       <h>64</h>
     </coordinates>
@@ -164,8 +191,8 @@ style=wordwrap</panel_attributes>
   <element>
     <id>Text</id>
     <coordinates>
-      <x>424</x>
-      <y>480</y>
+      <x>1080</x>
+      <y>432</y>
       <w>128</w>
       <h>80</h>
     </coordinates>
@@ -180,13 +207,13 @@ style=wordwrap</panel_attributes>
   <element>
     <id>Text</id>
     <coordinates>
-      <x>424</x>
-      <y>552</y>
+      <x>1080</x>
+      <y>504</y>
       <w>192</w>
       <h>112</h>
     </coordinates>
     <panel_attributes>budgetSelectionMenu
-1. Deposit
+1. Modify
 2. Transaction(s)
 3. Delete Budget
 4. Rename Budget
@@ -196,8 +223,8 @@ style=wordwrap</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>672</x>
-      <y>480</y>
+      <x>272</x>
+      <y>376</y>
       <w>272</w>
       <h>80</h>
     </coordinates>
@@ -213,13 +240,26 @@ _+readTextFromFile(filePath : String) : String_
   <element>
     <id>Text</id>
     <coordinates>
-      <x>864</x>
-      <y>48</y>
+      <x>1520</x>
+      <y>0</y>
       <w>112</w>
       <h>56</h>
     </coordinates>
     <panel_attributes>FileIO is the class used to make all of our data persistent.
 style=wordwrap</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLPackage</id>
+    <coordinates>
+      <x>240</x>
+      <y>240</y>
+      <w>472</w>
+      <h>296</h>
+    </coordinates>
+    <panel_attributes>View
+--
+bg=red</panel_attributes>
     <additional_attributes/>
   </element>
 </diagram>
