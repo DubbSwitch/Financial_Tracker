@@ -1,5 +1,5 @@
 package Models;
 
 public class Budget {
-    private int poop = 1;
+    private int poop = 2;
 }
