@@ -1,9 +1,7 @@
 package controllers;
 
-import Models.User;
+import models.User;
 import lib.ConsoleIO;
-
-import java.io.Console;
 
 public class MCBudgetController {
     public static void run(){
@@ -12,8 +10,7 @@ public class MCBudgetController {
     }
     private static int homeMenu(){
         String[] options = {"Login","Create New User","Reset Password"};
-        int choice = ConsoleIO.promptForMenuSelection(options,true);
-        return choice;
+        return ConsoleIO.promptForMenuSelection(options,true);
     }
     private static void homeSwitch(int choice){
         switch (choice){

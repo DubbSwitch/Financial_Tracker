@@ -4,12 +4,12 @@
   <element>
     <id>UMLPackage</id>
     <coordinates>
-      <x>784</x>
+      <x>560</x>
       <y>160</y>
       <w>488</w>
       <h>608</h>
     </coordinates>
-    <panel_attributes>Controller
+    <panel_attributes>controllers
 --
 bg=blue</panel_attributes>
     <additional_attributes/>
@@ -17,7 +17,7 @@ bg=blue</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>960</x>
+      <x>736</x>
       <y>184</y>
       <w>88</w>
       <h>56</h>
@@ -32,7 +32,7 @@ run();</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1584</x>
+      <x>1360</x>
       <y>104</y>
       <w>552</w>
       <h>408</h>
@@ -71,7 +71,7 @@ run();</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1360</x>
+      <x>1136</x>
       <y>104</y>
       <w>200</w>
       <h>168</h>
@@ -94,12 +94,12 @@ run();</panel_attributes>
   <element>
     <id>UMLPackage</id>
     <coordinates>
-      <x>1288</x>
+      <x>1064</x>
       <y>64</y>
       <w>848</w>
       <h>544</h>
     </coordinates>
-    <panel_attributes>Models
+    <panel_attributes>models
 --
 bg=green</panel_attributes>
     <additional_attributes/>
@@ -107,7 +107,7 @@ bg=green</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>808</x>
+      <x>584</x>
       <y>248</y>
       <w>392</w>
       <h>512</h>
@@ -158,7 +158,7 @@ layer=1</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>256</x>
+      <x>32</x>
       <y>264</y>
       <w>384</w>
       <h>104</h>
@@ -176,7 +176,7 @@ _+promptForMenu(menu : String[]) : </panel_attributes>
   <element>
     <id>Text</id>
     <coordinates>
-      <x>1080</x>
+      <x>856</x>
       <y>368</y>
       <w>232</w>
       <h>64</h>
@@ -191,7 +191,7 @@ style=wordwrap</panel_attributes>
   <element>
     <id>Text</id>
     <coordinates>
-      <x>1080</x>
+      <x>856</x>
       <y>432</y>
       <w>128</w>
       <h>80</h>
@@ -207,7 +207,7 @@ style=wordwrap</panel_attributes>
   <element>
     <id>Text</id>
     <coordinates>
-      <x>1080</x>
+      <x>856</x>
       <y>504</y>
       <w>192</w>
       <h>112</h>
@@ -223,7 +223,7 @@ style=wordwrap</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>272</x>
+      <x>48</x>
       <y>376</y>
       <w>272</w>
       <h>80</h>
@@ -240,7 +240,7 @@ _+readTextFromFile(filePath : String) : String_
   <element>
     <id>Text</id>
     <coordinates>
-      <x>1520</x>
+      <x>1296</x>
       <y>0</y>
       <w>112</w>
       <h>56</h>
@@ -252,12 +252,12 @@ style=wordwrap</panel_attributes>
   <element>
     <id>UMLPackage</id>
     <coordinates>
-      <x>240</x>
+      <x>16</x>
       <y>240</y>
       <w>472</w>
       <h>296</h>
     </coordinates>
-    <panel_attributes>View
+    <panel_attributes>views
 --
 bg=red</panel_attributes>
     <additional_attributes/>

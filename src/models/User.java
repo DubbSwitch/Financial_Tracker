@@ -1,8 +1,5 @@
-package Models;
+package models;
 
-import lib.ConsoleIO;
-
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class User {
