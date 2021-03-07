@@ -1,7 +1,7 @@
 <component name="libraryTable">
   <library name="ConsoleIO">
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/src/ConsoleIO.jar!/" />
+      <root url="jar://$PROJECT_DIR$/src/views/ConsoleIO.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />
