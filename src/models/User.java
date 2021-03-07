@@ -3,6 +3,7 @@ package models;
 import java.util.ArrayList;
 
 public class User {
+
     private String userName;
     private String displayName;
     private String password;
@@ -50,18 +51,22 @@ public class User {
         this.secAnswer = secAnswer;
     }
 
-    public void addNewBudget(double amount, Budget budget){
+    public void addNewBudget(double amount, Budget budget) {
 
     }
+
     public void deleteBudget(int choice) {
-        if(choice == 0){
+        if (choice == 0) {
             System.out.println("There are no budgets to delete");
-        }
-        else
-        budgetList.remove(choice-1);
+        } else
+            budgetList.remove(choice - 1);
     }
-    public void deposit(double amount, Budget budget){}
-    public void withdraw(double amount, Budget budget){}
+
+    public void deposit(double amount, Budget budget) {
+    }
+
+    public void withdraw(double amount, Budget budget) {
+    }
 
     public User(String userName, String displayName, String password, String secQuestion, String secAnswer) {
         setUserName(userName);
@@ -70,6 +75,4 @@ public class User {
         setSecQuestion(secQuestion);
         setSecAnswer(secAnswer);
     }
-
-
 }
