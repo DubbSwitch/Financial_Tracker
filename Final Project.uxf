@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <diagram program="umlet" version="14.3.0">
-  <zoom_level>8</zoom_level>
+  <zoom_level>12</zoom_level>
   <element>
     <id>UMLPackage</id>
     <coordinates>
-      <x>560</x>
-      <y>160</y>
-      <w>488</w>
-      <h>608</h>
+      <x>816</x>
+      <y>240</y>
+      <w>732</w>
+      <h>912</h>
     </coordinates>
     <panel_attributes>controllers
 --
@@ -17,10 +17,10 @@ bg=blue</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>736</x>
-      <y>184</y>
-      <w>88</w>
-      <h>56</h>
+      <x>1080</x>
+      <y>276</y>
+      <w>132</w>
+      <h>84</h>
     </coordinates>
     <panel_attributes>Main
 -
@@ -32,10 +32,10 @@ run();</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1360</x>
-      <y>104</y>
-      <w>552</w>
-      <h>408</h>
+      <x>2016</x>
+      <y>156</y>
+      <w>828</w>
+      <h>612</h>
     </coordinates>
     <panel_attributes>User
 -
@@ -71,10 +71,10 @@ run();</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1136</x>
-      <y>104</y>
-      <w>200</w>
-      <h>168</h>
+      <x>1680</x>
+      <y>156</y>
+      <w>300</w>
+      <h>252</h>
     </coordinates>
     <panel_attributes>Budget
 -
@@ -94,10 +94,10 @@ run();</panel_attributes>
   <element>
     <id>UMLPackage</id>
     <coordinates>
-      <x>1064</x>
-      <y>64</y>
-      <w>848</w>
-      <h>544</h>
+      <x>1632</x>
+      <y>96</y>
+      <w>1272</w>
+      <h>816</h>
     </coordinates>
     <panel_attributes>models
 --
@@ -107,10 +107,10 @@ bg=green</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>584</x>
-      <y>248</y>
-      <w>392</w>
-      <h>512</h>
+      <x>852</x>
+      <y>372</y>
+      <w>588</w>
+      <h>768</h>
     </coordinates>
     <panel_attributes>MCBudgeting
 -
@@ -149,7 +149,7 @@ _-renameBudget(budget : Budget, newName : String) : void_
 _-accountSettingsMenu() : int_
 _-accountSettingsSwitch(choice : int) : void_
 _-changeDisplayName(newName : String) : void_
-_-changePassword(newPass : String) : void_
+_-changePassword(newPassword : String) : void_
 _-changeSecQnA(question : String, answer :String) : void_
 
 layer=1</panel_attributes>
@@ -158,10 +158,10 @@ layer=1</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>32</x>
-      <y>264</y>
-      <w>384</w>
-      <h>104</h>
+      <x>24</x>
+      <y>396</y>
+      <w>576</w>
+      <h>156</h>
     </coordinates>
     <panel_attributes>ConsoleIO
 -
@@ -176,10 +176,10 @@ _+promptForMenu(menu : String[]) : </panel_attributes>
   <element>
     <id>Text</id>
     <coordinates>
-      <x>856</x>
-      <y>368</y>
-      <w>232</w>
-      <h>64</h>
+      <x>1260</x>
+      <y>552</y>
+      <w>348</w>
+      <h>96</h>
     </coordinates>
     <panel_attributes>userMenu auto prints Budgets (if available)
 1. Budgeting
@@ -191,10 +191,10 @@ style=wordwrap</panel_attributes>
   <element>
     <id>Text</id>
     <coordinates>
-      <x>856</x>
-      <y>432</y>
-      <w>128</w>
-      <h>80</h>
+      <x>1260</x>
+      <y>648</y>
+      <w>192</w>
+      <h>120</h>
     </coordinates>
     <panel_attributes>budgetingMenu
 print Budgets
@@ -207,10 +207,10 @@ style=wordwrap</panel_attributes>
   <element>
     <id>Text</id>
     <coordinates>
-      <x>856</x>
-      <y>504</y>
-      <w>192</w>
-      <h>112</h>
+      <x>1260</x>
+      <y>756</y>
+      <w>288</w>
+      <h>168</h>
     </coordinates>
     <panel_attributes>budgetSelectionMenu
 1. Modify
@@ -224,9 +224,9 @@ style=wordwrap</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>48</x>
-      <y>376</y>
-      <w>272</w>
-      <h>80</h>
+      <y>564</y>
+      <w>408</w>
+      <h>120</h>
     </coordinates>
     <panel_attributes>FileIO
 -
@@ -240,10 +240,10 @@ _+readTextFromFile(filePath : String) : String_
   <element>
     <id>Text</id>
     <coordinates>
-      <x>1296</x>
+      <x>1920</x>
       <y>0</y>
-      <w>112</w>
-      <h>56</h>
+      <w>168</w>
+      <h>84</h>
     </coordinates>
     <panel_attributes>FileIO is the class used to make all of our data persistent.
 style=wordwrap</panel_attributes>
@@ -252,10 +252,10 @@ style=wordwrap</panel_attributes>
   <element>
     <id>UMLPackage</id>
     <coordinates>
-      <x>16</x>
-      <y>240</y>
-      <w>472</w>
-      <h>296</h>
+      <x>0</x>
+      <y>360</y>
+      <w>708</w>
+      <h>444</h>
     </coordinates>
     <panel_attributes>views
 --
