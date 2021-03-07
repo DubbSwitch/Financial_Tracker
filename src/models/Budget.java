@@ -8,11 +8,13 @@ public class Budget {
     private double funds;
     private String name;
 
+    //TODO write method
     public double deposit(double amount) {
 
         return 0;
     }
 
+    //TODO write method
     public double withdraw(double amount) {
 
         return 0;
