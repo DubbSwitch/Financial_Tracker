@@ -39,22 +39,19 @@ public class MCBudgetController {
     private static void login() {
         String username = ConsoleIO.promptForString("Enter your Username : ", false);
         // added a try catch because if their was no users created it would cause a NulLPointerError
+        String password = ConsoleIO.promptForString("Enter your password",false);
         try{
-        if(username.equals(user.getUserName())){
-            String passPrompt = "***NOTE: if you do not have an account or cannot remember your password press enter to go back***\nEnter your password:";
-            boolean success = ConsoleIO.promptForBoolean(passPrompt, user.getPassword(), "");
-            //IF user's input is equal to username's password continue into the account
-            if (success) {
-                int choice = userMenu();
-                userSwitch(choice);
-                //ELSE go back to the home screen
-            }else {
-                run();
-            }
+        if(user.getUserName().equals(username) && user.getPassword().equals(password)){
+            int choice = userMenu();
+            userSwitch(choice);
+        }else{
+            System.out.println("Password was incorrect: ");
+            run();
         }}catch (NullPointerException nfe){
-            System.out.println("User " + username + " does not exist.  Please create an account");
+            System.out.println("User: '" + username + "', does not exist.");
             run();
         }
+
     }
 
     private static void createUser() {
