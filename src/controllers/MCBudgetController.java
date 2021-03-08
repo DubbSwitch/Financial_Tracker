@@ -37,9 +37,9 @@ public class MCBudgetController {
 
     //TODO write method
     private static void login() {
-        String username = ConsoleIO.promptForString("Enter your Username : ", false);
+        String username = ConsoleIO.promptForString("Enter your Username: ", false);
         // added a try catch because if their was no users created it would cause a NulLPointerError
-        String password = ConsoleIO.promptForString("Enter your password",false);
+        String password = ConsoleIO.promptForString("Enter your password: ",false);
         try{
         if(user.getUserName().equals(username) && user.getPassword().equals(password)){
             int choice = userMenu();
@@ -70,6 +70,26 @@ public class MCBudgetController {
     //TODO write method
     private static void resetPassword() {
         // prompts the user for their username
+        String username = ConsoleIO.promptForString("Enter your username: ", false);
+        try{
+            if(username.equals(user.getUserName())){
+                String answer = ConsoleIO.promptForString(user.getSecQuestion() + " : ",false);
+                if(answer.equals(user.getSecAnswer())){
+                    String password = ConsoleIO.promptForString("Enter your new password: ",false);
+                    user.setPassword(password);
+                }else {
+                    System.out.println("The answer to your security question was incorrect.");
+                }
+            }
+            else {
+                System.out.println("User '"+ username+"' not found.");
+
+            }
+        }catch (NullPointerException nfe){
+            System.out.println("User '" + username + "' does not exist.");
+            //run();
+        }
+        run();
         //checks if that user exists
         //IF user exists
             // Prompt their security question
@@ -91,7 +111,7 @@ public class MCBudgetController {
     //TODO write method
     private static void userSwitch(int choice) {
         int input;
-        switch (choice){
+        switch (choice) {
             case 1:
                 input = budgetingMenu();
                 budgetingSwitch(input);
