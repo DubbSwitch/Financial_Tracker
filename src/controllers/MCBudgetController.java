@@ -5,7 +5,7 @@ import models.User;
 import lib.ConsoleIO;
 
 public class MCBudgetController {
-
+    static User user; // This variable is being used to test methods while data persistence is still being setup
     public static void run() {
         int choice = homeMenu();
         homeSwitch(choice);
@@ -37,23 +37,48 @@ public class MCBudgetController {
 
     //TODO write method
     private static void login() {
-
+        String username = ConsoleIO.promptForString("Enter your Username : ", false);
+        // added a try catch because if their was no users created it would cause a NulLPointerError
+        try{
+        if(username.equals(user.getUserName())){
+            String passPrompt = "***NOTE: if you do not have an account or cannot remember your password press enter to go back***\nEnter your password:";
+            boolean success = ConsoleIO.promptForBoolean(passPrompt, user.getPassword(), "");
+            //IF user's input is equal to username's password continue into the account
+            if (success) {
+                int choice = userMenu();
+                userSwitch(choice);
+                //ELSE go back to the home screen
+            }else {
+                run();
+            }
+        }}catch (NullPointerException nfe){
+            System.out.println("User " + username + " does not exist.  Please create an account");
+            run();
+        }
     }
 
     private static void createUser() {
         String pED = "Please enter desired";
         String userName = ConsoleIO.promptForString(pED + " username: ", false);
-        String password = ConsoleIO.promptForString(pED + " password", true);
-        String question = ConsoleIO.promptForString("Security Question for password reset\n" + pED + "Question", false);
-        String answer = ConsoleIO.promptForString(pED + "answer: ", false);
-        String displayName = ConsoleIO.promptForString(pED + "display name: ", false);
-        new User(userName, displayName, password, question, answer);
+        String password = ConsoleIO.promptForString(pED + " password: ", true);
+        String question = ConsoleIO.promptForString("Security Question for password reset\n" + pED + "Question: ", false);
+        String answer = ConsoleIO.promptForString(pED + " answer: ", false);
+        String displayName = ConsoleIO.promptForString(pED + " display name: ", false);
+        // user is a place holder strictly for testing
+        // the end of this method should create a new file with the user's information.
+        user  = new User(userName, displayName, password, question, answer);
         run();
     }
 
     //TODO write method
     private static void resetPassword() {
-
+        // prompts the user for their username
+        //checks if that user exists
+        //IF user exists
+            // Prompt their security question
+                // IF user input is true
+                    // Prompt user for new password and set it as the users new password
+                //else go back to homeMenu
     }
 
     //      //
@@ -61,19 +86,32 @@ public class MCBudgetController {
     //      //
 
     //TODO write method
-    private int userMenu() {
-
-        return 0;
+    private static int userMenu() {
+        String[] menu = {"Budgeting","Account Settings","Logout"};
+        int choice = ConsoleIO.promptForMenuSelection(menu,false);
+        return choice;
     }
 
     //TODO write method
-    private void userSwitch(int choice) {
-
+    private static void userSwitch(int choice) {
+        int input;
+        switch (choice){
+            case 1:
+                input = budgetingMenu();
+                budgetingSwitch(input);
+                break;
+            case 2:
+                input = accountSettingsMenu();
+                accountSettingsSwitch(input);
+                break;
+            case 3:
+                logout();
+        }
     }
 
     //TODO write method
-    private void logout() {
-
+    private static void logout() {
+        //This should refresh the app and start from run();
     }
 
     //           //
@@ -81,18 +119,28 @@ public class MCBudgetController {
     //           //
 
     //TODO write method
-    private int budgetingMenu() {
-
-        return 0;
+    private static int budgetingMenu() {
+        String[] menu = {"Select Budget","Create Budget","Savings"};
+        int choice = ConsoleIO.promptForMenuSelection(menu,true);
+        return choice;
     }
 
     //TODO write method
-    private void budgetingSwitch(int choice) {
+    private static void budgetingSwitch(int choice) {
+        int input;
+        switch (choice){
+            case 1:
+              input = budgetSelectionmenu();
+              budgetSelectionSwitch(input);
+              break;
+            case 2:
 
+                createBudget(user.);
+        }
     }
 
     //TODO write method
-    private void createBudget(double funds, String name) {
+    private static void createBudget(double funds, String name) {
 
     }
 
@@ -101,13 +149,13 @@ public class MCBudgetController {
     //         //
 
     //TODO write method
-    private int savingsMenu() {
+    private static int savingsMenu() {
 
         return 0;
     }
 
     //TODO write method
-    private void modifySavingsAmount(double amount, int choice) {
+    private static void modifySavingsAmount(double amount, int choice) {
 
     }
 
@@ -116,33 +164,33 @@ public class MCBudgetController {
     //       //
 
     //TODO write method
-    private int budgetSelectionmenu() {
+    private static int budgetSelectionmenu() {
 
         return 0;
     }
 
     //TODO write method
-    private void budgetSelectionSwitch(int choice) {
+    private static void budgetSelectionSwitch(int choice) {
 
     }
 
     //TODO write method
-    private void modifyBudgetMenu() {
+    private static void modifyBudgetMenu() {
 
     }
 
     //TODO write method
-    private void viewTransactionHistory(Budget budget) {
+    private static void viewTransactionHistory(Budget budget) {
 
     }
 
     //TODO write method
-    private void deleteBudget(Budget budget) {
+    private static void deleteBudget(Budget budget) {
 
     }
 
     //TODO write method
-    private void renameBudget(Budget budget, String newName) {
+    private static void renameBudget(Budget budget, String newName) {
 
     }
 
@@ -151,28 +199,28 @@ public class MCBudgetController {
     //         //
 
     //TODO write method
-    private int accountSettingsMenu() {
+    private static int accountSettingsMenu() {
 
         return 0;
     }
 
     //TODO wrtie method
-    private void accountSeetingsSwitch(int choice) {
+    private static void accountSettingsSwitch(int choice) {
 
     }
 
     //TODO write method
-    private void changeDisplayName(String newName) {
+    private static void changeDisplayName(String newName) {
 
     }
 
     //TODO write method
-    private void changePassword(String newPassword) {
+    private static void changePassword(String newPassword) {
 
     }
 
     //TODO write method
-    private void changeSecQnA(String question, String answer) {
+    private static void changeSecQnA(String question, String answer) {
 
     }
 }
