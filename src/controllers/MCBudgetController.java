@@ -88,8 +88,7 @@ public class MCBudgetController {
     //TODO write method
     private static int userMenu() {
         String[] menu = {"Budgeting","Account Settings","Logout"};
-        int choice = ConsoleIO.promptForMenuSelection(menu,false);
-        return choice;
+        return ConsoleIO.promptForMenuSelection(menu,false);
     }
 
     //TODO write method
@@ -121,8 +120,7 @@ public class MCBudgetController {
     //TODO write method
     private static int budgetingMenu() {
         String[] menu = {"Select Budget","Create Budget","Savings"};
-        int choice = ConsoleIO.promptForMenuSelection(menu,true);
-        return choice;
+        return ConsoleIO.promptForMenuSelection(menu,true);
     }
 
     //TODO write method
