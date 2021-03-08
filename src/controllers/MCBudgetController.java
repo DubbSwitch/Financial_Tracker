@@ -130,12 +130,21 @@ public class MCBudgetController {
         int input;
         switch (choice){
             case 1:
-              input = budgetSelectionmenu();
+              input = budgetSelectionMenu();
               budgetSelectionSwitch(input);
               break;
             case 2:
-
-                createBudget(user.);
+                String name = ConsoleIO.promptForString("Enter name of budget: ", false);
+                int funds = ConsoleIO.promptForInt("Amount of money usable: ",1,200000000);
+                createBudget(funds,name);
+                userSwitch(1);
+                break;
+            case 3:
+                savingsMenu();
+                break;
+            case 0:
+                input = userMenu();
+                userSwitch(input);
         }
     }
 
@@ -149,9 +158,9 @@ public class MCBudgetController {
     //         //
 
     //TODO write method
-    private static int savingsMenu() {
+    private static void savingsMenu() {
 
-        return 0;
+
     }
 
     //TODO write method
@@ -164,7 +173,7 @@ public class MCBudgetController {
     //       //
 
     //TODO write method
-    private static int budgetSelectionmenu() {
+    private static int budgetSelectionMenu() {
 
         return 0;
     }
