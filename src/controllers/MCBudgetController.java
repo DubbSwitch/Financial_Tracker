@@ -224,27 +224,57 @@ public class MCBudgetController {
 
     //TODO write method
     private static int accountSettingsMenu() {
-
-        return 0;
+        String[] menu = {"Change Display Name","Change Password","Change Change Security Question and Answer"};
+        int choice = ConsoleIO.promptForMenuSelection(menu,true);
+        return choice;
     }
 
     //TODO wrtie method
     private static void accountSettingsSwitch(int choice) {
-
+        switch (choice){
+            case 1:
+                String displayName = ConsoleIO.promptForString("Please enter new name: ",false);
+                changeDisplayName(displayName);
+                break;
+            case 2:
+                String password = ConsoleIO.promptForString("Please enter new password: ",false);
+                changePassword(password);
+                break;
+            case 3:
+                String question = ConsoleIO.promptForString("Enter your security question: ",false);
+                String answer = ConsoleIO.promptForString("Enter the to your security answer: ",false);
+                changeSecQnA(question,answer);
+                break;
+            default:
+                // brings the user back to the previous menu
+                int input = userMenu();
+                userSwitch(input);
+                break;
+        }
     }
 
     //TODO write method
     private static void changeDisplayName(String newName) {
-
+        // Sets the new display name for the user and brings them back to the account settings menu
+            user.setDisplayName(newName);
+            int choice = accountSettingsMenu();
+            accountSettingsSwitch(choice);
     }
 
     //TODO write method
     private static void changePassword(String newPassword) {
-
+        // Sets the new password for the user and brings them back to the account settings menu
+            user.setPassword(newPassword);
+        int choice = accountSettingsMenu();
+        accountSettingsSwitch(choice);
     }
 
     //TODO write method
     private static void changeSecQnA(String question, String answer) {
-
+        //Sets the new Security QnA for the user and brings them back to the account settings
+        user.setSecQuestion(question);
+        user.setSecAnswer(answer);
+        int choice = accountSettingsMenu();
+        accountSettingsSwitch(choice);
     }
 }
