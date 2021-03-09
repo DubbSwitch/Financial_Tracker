@@ -1,30 +1,51 @@
 package models;
 
+import models.Records.BudgetChangeRecord;
+import models.Records.FundsChangeRecord;
+
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Budget {
+//TODO: IF YOU MODIFY THIS CLASS IN ANY WAY, YOU MUST UPDATE serialVersionUID TO A VALID SERIAL VERSION ACROSS ALL SERIALIZABLE CLASSES!!
 
-    private ArrayList<Double> budgetOverTime = new ArrayList<>();
+public class Budget implements Serializable {
+    private static final long serialVersionUID = 4L;
+    private ArrayList<BudgetChangeRecord> budgetOverTime = new ArrayList<>();
+    private ArrayList<FundsChangeRecord> fundsHistory = new ArrayList<>();
     private double funds;
+    private double budgetAmmout;
     private String name;
 
-    //TODO write method
-    public double deposit(double amount) {
+    public Budget(double funds, String name) {
+        setFunds(funds);
+        setName(name);
+    }
 
-        return 0;
+    //TODO Maybe prevent users from going over budget?
+
+    public double deposit(double amount) {
+        fundsHistory.add(new FundsChangeRecord(funds, (funds + amount), "DEPOSIT"));
+        funds += amount;
+        return funds;
     }
 
     //TODO write method
     public double withdraw(double amount) {
-
-        return 0;
+        fundsHistory.add(new FundsChangeRecord(funds, (funds - amount), "WITHDRAW"));
+        funds -= amount;
+        return funds;
     }
 
-    public ArrayList<Double> getBudgetOverTime() {
+    private void changeBudget(double newBudgetAmmout) {
+        budgetOverTime.add(new BudgetChangeRecord(budgetAmmout, newBudgetAmmout));
+        budgetAmmout = newBudgetAmmout;
+    }
+
+    public ArrayList<BudgetChangeRecord> getBudgetOverTime() {
         return budgetOverTime;
     }
 
-    public void setBudgetOverTime(ArrayList<Double> budgetOverTime) {
+    public void setBudgetOverTime(ArrayList<BudgetChangeRecord> budgetOverTime) {
         this.budgetOverTime = budgetOverTime;
     }
 
@@ -42,11 +63,6 @@ public class Budget {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public Budget(double funds, String name) {
-        setFunds(funds);
-        setName(name);
     }
 
     @Override
