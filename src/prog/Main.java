@@ -1,4 +1,6 @@
-package controllers;
+package prog;
+
+import controllers.MCBudgetController;
 
 public class Main {
 

@@ -1,9 +1,12 @@
 package models;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class User {
+//TODO: IF YOU MODIFY THIS CLASS IN ANY WAY, YOU MUST UPDATE serialVersionUID TO A VALID SERIAL VERSION ACROSS ALL SERIALIZABLE CLASSES!!
 
+public class User implements Serializable {
+    private static final long serialVersionUID = 4L;
     private String userName;
     private String displayName;
     private String password;
@@ -11,9 +14,6 @@ public class User {
     private String secAnswer;
     private ArrayList<Budget> budgetList;
 
-    //-------------------------
-    //BEGIN GETTERS AND SETTERS
-    //-------------------------
     public String getUserName() {
         return userName;
     }
@@ -53,13 +53,6 @@ public class User {
     public void setSecAnswer(String secAnswer) {
         this.secAnswer = secAnswer;
     }
-
-    public ArrayList<Budget> getBudgetList() { return budgetList; }
-    //-------------------------
-    //END GETTERS AND SETTERS
-    //-------------------------
-
-
 
     public void addNewBudget(double amount, Budget budget) {
 
