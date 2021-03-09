@@ -42,20 +42,20 @@ public class MCBudgetController {
     //TODO write method
     private static void login() {
         String username = ConsoleIO.promptForString("Enter your Username: ", false);
-        // added a try catch because if their was no users created it would cause a NulLPointerError
+        // added a try catch because if their was no users created it would cause a NullPointerError
         String password = ConsoleIO.promptForString("Enter your password: ",false);
-        try{
-        if(currentUser.getUserName().equals(username) && currentUser.getPassword().equals(password)){
-            int choice = userMenu();
-            userSwitch(choice);
-        }else{
-            System.out.println("Password was incorrect: ");
-            run();
-        }}catch (NullPointerException nfe){
-            System.out.println("User: '" + username + "', does not exist.");
-            run();
-        }
-
+        try {
+            if(currentUser.getUserName().equals(username) && currentUser.getPassword().equals(password)){
+                int choice = userMenu();
+                userSwitch(choice);
+            }else{
+                System.out.println("Password was incorrect: ");
+                run();
+            }
+        } catch (NullPointerException nfe){
+                System.out.println("User '" + username + "' does not exist.");
+                run();
+            }
     }
 
     private static void createUser() {
@@ -114,15 +114,12 @@ public class MCBudgetController {
 
     //TODO write method
     private static void userSwitch(int choice) {
-        int input;
         switch (choice) {
             case 1:
-                input = budgetingMenu();
-                budgetingSwitch(input);
+                budgetingSwitch(budgetingMenu());
                 break;
             case 2:
-                input = accountSettingsMenu();
-                accountSettingsSwitch(input);
+                accountSettingsSwitch(accountSettingsMenu());
                 break;
             case 3:
                 logout();
@@ -174,7 +171,7 @@ public class MCBudgetController {
         }
 
         int input = ConsoleIO.promptForMenuSelection("Please select the budget you'd like to view:", menu,false);
-        budgetOptionsMenu(currentUser.getBudgetList().get(input - 1));
+        budgetOptionsSwitch(budgetOptionsMenu(), currentUser.getBudgetList().get(input - 1));
 
     }
 
@@ -182,10 +179,6 @@ public class MCBudgetController {
     private static void createBudget(double funds, String name) {
 
     }
-
-    //         //
-    // SAVINGS //
-    //         //
 
     //TODO write method
     private static void savingsMenu() {
@@ -198,18 +191,34 @@ public class MCBudgetController {
 
     }
 
-    //       //
-    // MENUS //
-    //       //
-
     //TODO write method
-    private static int budgetOptionsMenu(Budget budget) {
-        return 0;
+    private static int budgetOptionsMenu() {
+        String[] menu = {"Modify Budget","View History","Rename Budget","Delete Budget"};
+        return ConsoleIO.promptForMenuSelection("", menu,true);
     }
 
     //TODO write method
-    private static void budgetOptionsSwitch(int choice) {
-
+    private static void budgetOptionsSwitch(int choice, Budget budget) {
+        switch (choice) {
+            case 1:
+                modifyBudgetMenu();
+                break;
+            case 2:
+                viewTransactionHistory(budget);
+                break;
+            case 3:
+                renameBudget(budget, ConsoleIO.promptForString("Please enter a new name for the budget:",false));
+                break;
+            case 4:
+                String response = ConsoleIO.promptForString("Warning: Deleting a budget and its full transaction history is permanent and cannot be undone.\nTo confirm deletion, please enter your password.", true);
+                if (response.equals(currentUser.getPassword())) {
+                    deleteBudget(budget);
+                } else {
+                    System.out.println("Incorrect password. Your budget has not been deleted.");
+                    budgetOptionsSwitch(budgetOptionsMenu(), budget);
+                }
+                break;
+        }
     }
 
     //TODO write method

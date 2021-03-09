@@ -17,7 +17,7 @@ bg=blue</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1080</x>
+      <x>828</x>
       <y>276</y>
       <w>132</w>
       <h>84</h>
@@ -107,16 +107,16 @@ bg=green</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>852</x>
+      <x>828</x>
       <y>372</y>
-      <w>588</w>
+      <w>456</w>
       <h>768</h>
     </coordinates>
     <panel_attributes>MCBudgeting
 -
+_-currentUser : User_
+_-currentBudget : Budget_
 _-users : ArrayList&lt;User&gt;_
-
-
 -
 _+run() : void_
 _-homeMenu() : int_
@@ -132,14 +132,15 @@ _-logout() : void_
 
 _-budgetingMenu() : int_
 _-budgetingSwitch(choice : int) : void_
+_-chooseBudget() : Budget_
 _-createBudget(funds : double, name : String) : void_
 
 _-savingsMenu() : int_
 _-modifySavings(amount : double, choice : int) : void_
 
 
-_-budgetSelectionMenu() : int_
-_-budgetSelectionSwitch(choice :int) : void_
+_-budgetOptionsMenu() : int_
+_-budgetOptionsSwitch(choice :int) : void_
 _-modifyBudgetMenu() : void_
 _-viewTransactionHistory(budget : Budget)  : void_
 _-deleteBudget(budget : Budget) : void_
@@ -176,12 +177,12 @@ _+promptForMenu(menu : String[]) : </panel_attributes>
   <element>
     <id>Text</id>
     <coordinates>
-      <x>1260</x>
-      <y>552</y>
-      <w>348</w>
+      <x>1308</x>
+      <y>588</y>
+      <w>228</w>
       <h>96</h>
     </coordinates>
-    <panel_attributes>userMenu auto prints Budgets (if available)
+    <panel_attributes>userMenu
 1. Budgeting
 2. Account Settings
 3. Log out
@@ -191,13 +192,12 @@ style=wordwrap</panel_attributes>
   <element>
     <id>Text</id>
     <coordinates>
-      <x>1260</x>
-      <y>648</y>
-      <w>192</w>
+      <x>1308</x>
+      <y>684</y>
+      <w>228</w>
       <h>120</h>
     </coordinates>
     <panel_attributes>budgetingMenu
-print Budgets
 1. Select Budget
 2. Create Budget
 3. Savings
@@ -207,16 +207,16 @@ style=wordwrap</panel_attributes>
   <element>
     <id>Text</id>
     <coordinates>
-      <x>1260</x>
-      <y>756</y>
-      <w>288</w>
+      <x>1308</x>
+      <y>780</y>
+      <w>228</w>
       <h>168</h>
     </coordinates>
-    <panel_attributes>budgetSelectionMenu
-1. Modify
-2. Transaction(s)
-3. Delete Budget
-4. Rename Budget
+    <panel_attributes>budgetOptionsMenu
+1. Modify Budget
+2. View History
+3. Rename Budget
+4. Delete Budget
 style=wordwrap</panel_attributes>
     <additional_attributes/>
   </element>
