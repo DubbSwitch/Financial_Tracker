@@ -25,7 +25,7 @@ public class FileController {
         FilenameFilter filter = (f, name) -> name.endsWith(".bdjc");
         String[] pathsToFiles = Dir.list(filter);
         if (pathsToFiles != null) {
-            int sel = new ConsoleIO().promptForMenuSelection(pathsToFiles, false) - 1;
+            int sel = new ConsoleIO().promptForMenuSelection("Select file to load: ", pathsToFiles, false) - 1;
             return (IODataModel) readFromFile(new File(Dir + "\\" + pathsToFiles[sel]));
         } else
             System.out.println("No .bdjc files in target directory. Does it exist?");
