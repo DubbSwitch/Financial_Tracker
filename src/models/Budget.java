@@ -13,7 +13,7 @@ public class Budget implements Serializable {
     private ArrayList<BudgetChangeRecord> budgetOverTime = new ArrayList<>();
     private ArrayList<FundsChangeRecord> fundsHistory = new ArrayList<>();
     private double funds;
-    private double budgetAmmout;
+    private double budgetAmount;
     private String name;
 
     public Budget(double funds, String name) {
@@ -36,9 +36,9 @@ public class Budget implements Serializable {
         return funds;
     }
 
-    private void changeBudget(double newBudgetAmmout) {
-        budgetOverTime.add(new BudgetChangeRecord(budgetAmmout, newBudgetAmmout));
-        budgetAmmout = newBudgetAmmout;
+    private void changeBudget(double newBudgetAmount) {
+        budgetOverTime.add(new BudgetChangeRecord(budgetAmount, newBudgetAmount));
+        budgetAmount = newBudgetAmount;
     }
 
     public ArrayList<BudgetChangeRecord> getBudgetOverTime() {
