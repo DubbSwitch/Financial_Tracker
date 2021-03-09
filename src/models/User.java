@@ -11,6 +11,9 @@ public class User {
     private String secAnswer;
     private ArrayList<Budget> budgetList;
 
+    //-------------------------
+    //BEGIN GETTERS AND SETTERS
+    //-------------------------
     public String getUserName() {
         return userName;
     }
@@ -50,6 +53,13 @@ public class User {
     public void setSecAnswer(String secAnswer) {
         this.secAnswer = secAnswer;
     }
+
+    public ArrayList<Budget> getBudgetList() { return budgetList; }
+    //-------------------------
+    //END GETTERS AND SETTERS
+    //-------------------------
+
+
 
     public void addNewBudget(double amount, Budget budget) {
 

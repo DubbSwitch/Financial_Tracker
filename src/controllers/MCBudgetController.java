@@ -4,8 +4,12 @@ import models.Budget;
 import models.User;
 import lib.ConsoleIO;
 
+import java.util.ArrayList;
+
 public class MCBudgetController {
-    static User user; // This variable is being used to test methods while data persistence is still being setup
+
+    static User currentUser;
+
     public static void run() {
         int choice = homeMenu();
         homeSwitch(choice);
@@ -13,7 +17,7 @@ public class MCBudgetController {
 
     private static int homeMenu() {
         String[] options = {"Login", "Create New User", "Reset Password"};
-        return ConsoleIO.promptForMenuSelection(options, true);
+        return ConsoleIO.promptForMenuSelection("", options, true);
     }
 
     private static void homeSwitch(int choice) {
@@ -41,7 +45,7 @@ public class MCBudgetController {
         // added a try catch because if their was no users created it would cause a NulLPointerError
         String password = ConsoleIO.promptForString("Enter your password: ",false);
         try{
-        if(user.getUserName().equals(username) && user.getPassword().equals(password)){
+        if(currentUser.getUserName().equals(username) && currentUser.getPassword().equals(password)){
             int choice = userMenu();
             userSwitch(choice);
         }else{
@@ -63,7 +67,7 @@ public class MCBudgetController {
         String displayName = ConsoleIO.promptForString(pED + " display name: ", false);
         // user is a place holder strictly for testing
         // the end of this method should create a new file with the user's information.
-        user  = new User(userName, displayName, password, question, answer);
+        currentUser = new User(userName, displayName, password, question, answer);
         run();
     }
 
@@ -72,11 +76,11 @@ public class MCBudgetController {
         // prompts the user for their username
         String username = ConsoleIO.promptForString("Enter your username: ", false);
         try{
-            if(username.equals(user.getUserName())){
-                String answer = ConsoleIO.promptForString(user.getSecQuestion() + " : ",false);
-                if(answer.equals(user.getSecAnswer())){
+            if(username.equals(currentUser.getUserName())){
+                String answer = ConsoleIO.promptForString(currentUser.getSecQuestion() + " : ",false);
+                if(answer.equals(currentUser.getSecAnswer())){
                     String password = ConsoleIO.promptForString("Enter your new password: ",false);
-                    user.setPassword(password);
+                    currentUser.setPassword(password);
                 }else {
                     System.out.println("The answer to your security question was incorrect.");
                 }
@@ -105,7 +109,7 @@ public class MCBudgetController {
     //TODO write method
     private static int userMenu() {
         String[] menu = {"Budgeting","Account Settings","Logout"};
-        return ConsoleIO.promptForMenuSelection(menu,false);
+        return ConsoleIO.promptForMenuSelection("", menu,false);
     }
 
     //TODO write method
@@ -137,7 +141,7 @@ public class MCBudgetController {
     //TODO write method
     private static int budgetingMenu() {
         String[] menu = {"Select Budget","Create Budget","Savings"};
-        return ConsoleIO.promptForMenuSelection(menu,true);
+        return ConsoleIO.promptForMenuSelection("", menu,true);
     }
 
     //TODO write method
@@ -145,12 +149,11 @@ public class MCBudgetController {
         int input;
         switch (choice){
             case 1:
-              input = budgetSelectionMenu();
-              budgetSelectionSwitch(input);
-              break;
+                chooseBudget();
+                break;
             case 2:
                 String name = ConsoleIO.promptForString("Enter name of budget: ", false);
-                int funds = ConsoleIO.promptForInt("Amount of money usable: ",1,200000000);
+                int funds = ConsoleIO.promptForInt("Amount of money allocated: ",1,1000000000);
                 createBudget(funds,name);
                 userSwitch(1);
                 break;
@@ -161,6 +164,18 @@ public class MCBudgetController {
                 input = userMenu();
                 userSwitch(input);
         }
+    }
+
+    private static void chooseBudget() {
+        //Creates an array containing the names of all the user's budgets, for later menu display
+        String[] menu = new String[currentUser.getBudgetList().size()];
+        for (int i = 0; i < menu.length; i++) {
+            menu[i] = currentUser.getBudgetList().get(i).getName();
+        }
+
+        int input = ConsoleIO.promptForMenuSelection("Please select the budget you'd like to view:", menu,false);
+        budgetOptionsMenu(currentUser.getBudgetList().get(input - 1));
+
     }
 
     //TODO write method
@@ -188,13 +203,12 @@ public class MCBudgetController {
     //       //
 
     //TODO write method
-    private static int budgetSelectionMenu() {
-
+    private static int budgetOptionsMenu(Budget budget) {
         return 0;
     }
 
     //TODO write method
-    private static void budgetSelectionSwitch(int choice) {
+    private static void budgetOptionsSwitch(int choice) {
 
     }
 
@@ -223,13 +237,12 @@ public class MCBudgetController {
     //         //
 
     //TODO write method
-    private static int accountSettingsMenu() {
-        String[] menu = {"Change Display Name","Change Password","Change Change Security Question and Answer"};
-        int choice = ConsoleIO.promptForMenuSelection(menu,true);
-        return choice;
+        private static int accountSettingsMenu() {
+        String[] menu = {"Change Display Name","Change Password","Change Security Question and Answer"};
+        return ConsoleIO.promptForMenuSelection("", menu,true);
     }
 
-    //TODO wrtie method
+    //TODO write method
     private static void accountSettingsSwitch(int choice) {
         switch (choice){
             case 1:
@@ -241,8 +254,8 @@ public class MCBudgetController {
                 changePassword(password);
                 break;
             case 3:
-                String question = ConsoleIO.promptForString("Enter your security question: ",false);
-                String answer = ConsoleIO.promptForString("Enter the to your security answer: ",false);
+                String question = ConsoleIO.promptForString("Enter your new security question: ",false);
+                String answer = ConsoleIO.promptForString("Enter the answer to your new security question: ",false);
                 changeSecQnA(question,answer);
                 break;
             default:
@@ -256,7 +269,7 @@ public class MCBudgetController {
     //TODO write method
     private static void changeDisplayName(String newName) {
         // Sets the new display name for the user and brings them back to the account settings menu
-            user.setDisplayName(newName);
+            currentUser.setDisplayName(newName);
             int choice = accountSettingsMenu();
             accountSettingsSwitch(choice);
     }
@@ -264,7 +277,7 @@ public class MCBudgetController {
     //TODO write method
     private static void changePassword(String newPassword) {
         // Sets the new password for the user and brings them back to the account settings menu
-            user.setPassword(newPassword);
+            currentUser.setPassword(newPassword);
         int choice = accountSettingsMenu();
         accountSettingsSwitch(choice);
     }
@@ -272,8 +285,8 @@ public class MCBudgetController {
     //TODO write method
     private static void changeSecQnA(String question, String answer) {
         //Sets the new Security QnA for the user and brings them back to the account settings
-        user.setSecQuestion(question);
-        user.setSecAnswer(answer);
+        currentUser.setSecQuestion(question);
+        currentUser.setSecAnswer(answer);
         int choice = accountSettingsMenu();
         accountSettingsSwitch(choice);
     }
