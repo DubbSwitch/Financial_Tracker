@@ -162,8 +162,7 @@ public class MCBudgetController {
         int input;
         switch (choice) {
             case 1:
-                input = budgetSelectionMenu();
-                budgetSelectionSwitch(input);
+                chooseBudget();
                 break;
             case 2:
                 String name = ConsoleIO.promptForString("Enter name of budget: ", false);
@@ -178,6 +177,18 @@ public class MCBudgetController {
                 input = userMenu();
                 userSwitch(input);
         }
+    }
+
+    private static void chooseBudget() {
+        //Creates an array containing the names of all the user's budgets, for later menu display
+        String[] menu = new String[contextUser.getBudgetList().size()];
+        for (int i = 0; i < menu.length; i++) {
+            menu[i] = contextUser.getBudgetList().get(i).getName();
+        }
+
+        int input = ConsoleIO.promptForMenuSelection("Please select the budget you'd like to view:", menu,false);
+        budgetOptionsSwitch(budgetOptionsMenu(), contextUser.getBudgetList().get(input - 1));
+
     }
 
     //TODO write method
@@ -200,19 +211,39 @@ public class MCBudgetController {
 
     }
 
-    //TODO write method
-    private static int budgetSelectionMenu() {
-
-        return 0;
-    }
-
     //       //
     // MENUS //
     //       //
 
-    //TODO write method
-    private static void budgetSelectionSwitch(int choice) {
 
+    //TODO write method
+    private static int budgetOptionsMenu() {
+        String[] menu = {"Modify Budget","View History","Rename Budget","Delete Budget"};
+        return ConsoleIO.promptForMenuSelection("", menu,true);
+    }
+
+    //TODO write method
+    private static void budgetOptionsSwitch(int choice, Budget budget) {
+        switch (choice) {
+            case 1:
+                modifyBudgetMenu();
+                break;
+            case 2:
+                viewTransactionHistory(budget);
+                break;
+            case 3:
+                renameBudget(budget, ConsoleIO.promptForString("Please enter a new name for the budget:",false));
+                break;
+            case 4:
+                String response = ConsoleIO.promptForString("Warning: Deleting a budget and its full transaction history is permanent and cannot be undone.\nTo confirm deletion, please enter your password.", true);
+                if (response.equals(contextUser.getPassword())) {
+                    deleteBudget(budget);
+                } else {
+                    System.out.println("Incorrect password. Your budget has not been deleted.");
+                    budgetOptionsSwitch(budgetOptionsMenu(), budget);
+                }
+                break;
+        }
     }
 
     //TODO write method
@@ -269,9 +300,7 @@ public class MCBudgetController {
         try {
             iodataModel = new FileController().readDirectory(fileConfigurations);
             run();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
+        } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
     }

@@ -6,7 +6,7 @@ import java.util.ArrayList;
 //TODO: IF YOU MODIFY THIS CLASS IN ANY WAY, YOU MUST UPDATE serialVersionUID TO A VALID SERIAL VERSION ACROSS ALL SERIALIZABLE CLASSES!!
 
 public class User implements Serializable {
-    private static final long serialVersionUID = 4L;
+    private static final long serialVersionUID = 5L;
     private String userName;
     private String displayName;
     private String password;
@@ -64,6 +64,8 @@ public class User implements Serializable {
         } else
             budgetList.remove(choice - 1);
     }
+
+    public ArrayList<Budget> getBudgetList() { return budgetList; }
 
     public void deposit(double amount, Budget budget) {
     }
