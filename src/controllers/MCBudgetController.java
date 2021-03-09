@@ -23,7 +23,7 @@ public class MCBudgetController {
 
     private static int homeMenu() {
         String[] options = {"Login", "Create New User", "Reset Password", "Load", "Save"};
-        return ConsoleIO.promptForMenuSelection(options, true);
+        return ConsoleIO.promptForMenuSelection(" ", options, true);
     }
 
     private static void homeSwitch(int choice) {
@@ -117,7 +117,7 @@ public class MCBudgetController {
     //TODO write method
     private static int userMenu() {
         String[] menu = {"Budgeting", "Account Settings", "Logout"};
-        return ConsoleIO.promptForMenuSelection(menu, false);
+        return ConsoleIO.promptForMenuSelection(" ",menu, false);
     }
 
     //      //
@@ -150,7 +150,7 @@ public class MCBudgetController {
     //TODO write method
     private static int budgetingMenu() {
         String[] menu = {"Select Budget", "Create Budget", "Savings"};
-        return ConsoleIO.promptForMenuSelection(menu, true);
+        return ConsoleIO.promptForMenuSelection(" ", menu, true);
     }
 
     //           //
@@ -280,7 +280,7 @@ public class MCBudgetController {
         int swc = 2;
         if (fileConfigurations.getPath() != null) {
             System.out.println("Use saved path: '" + fileConfigurations.getPath() + "'?");
-            ConsoleIO.promptForMenuSelection(new String[]{"Yes", "No"}, false);
+            ConsoleIO.promptForMenuSelection(" ", new String[]{"Yes", "No"}, false);
         }
         if (swc == 2)
             fileConfigurations.setPath(Paths.get(ConsoleIO.promptForString("Path to save data to: ", false)));
