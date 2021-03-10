@@ -6,7 +6,7 @@ import java.util.ArrayList;
 //TODO: IF YOU MODIFY THIS CLASS IN ANY WAY, YOU MUST UPDATE serialVersionUID TO A VALID SERIAL VERSION ACROSS ALL SERIALIZABLE CLASSES!!
 
 public class IODataModel implements Serializable {
-    private static final long serialVersionUID = 5L;
+    private static final long serialVersionUID = 4L;
     private ArrayList<Budget> validBudget = new ArrayList<>();
     private ArrayList<User> validUsers = new ArrayList<>();
 
