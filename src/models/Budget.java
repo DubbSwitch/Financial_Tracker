@@ -11,7 +11,7 @@ import java.util.ArrayList;
 public class Budget implements Serializable {
     private static final long serialVersionUID = 4L;
     private ArrayList<BudgetChangeRecord> budgetOverTime = new ArrayList<>();
-    private ArrayList<FundsChangeRecord> fundsHistory = new ArrayList<>();
+    private final ArrayList<FundsChangeRecord> fundsHistory = new ArrayList<>();
     private double funds;
     private double budgetAmount;
     private String name;
