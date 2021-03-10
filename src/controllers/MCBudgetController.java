@@ -75,7 +75,7 @@ public class MCBudgetController {
         String pED = "Please enter desired";
         String userName = ConsoleIO.promptForString(pED + " username: ", false);
         String password = ConsoleIO.promptForString(pED + " password: ", true);
-        String question = ConsoleIO.promptForString("Security Question for password reset\n" + pED + "Question: ", false);
+        String question = ConsoleIO.promptForString("Security Question for password reset\n" + pED + " Question: ", false);
         String answer = ConsoleIO.promptForString(pED + " answer: ", false);
         String displayName = ConsoleIO.promptForString(pED + " display name: ", false);
         // user is a place holder strictly for testing
@@ -268,8 +268,9 @@ public class MCBudgetController {
 
     //TODO write method
     private static int accountSettingsMenu() {
-
-        return 0;
+        String[] menu = {"Change Display Name","Change Password","Change Change Security Question and Answer"};
+        int choice = ConsoleIO.promptForMenuSelection("",menu,true);
+        return choice;
     }
 
     //         //
@@ -278,7 +279,26 @@ public class MCBudgetController {
 
     //TODO wrtie method
     private static void accountSettingsSwitch(int choice) {
-
+        switch (choice){
+            case 1:
+                String displayName = ConsoleIO.promptForString("Please enter new name: ",false);
+                changeDisplayName(displayName);
+                break;
+            case 2:
+                String password = ConsoleIO.promptForString("Please enter new password: ",false);
+                changePassword(password);
+                break;
+            case 3:
+                String question = ConsoleIO.promptForString("Enter your security question: ",false);
+                String answer = ConsoleIO.promptForString("Enter the to your security answer: ",false);
+                changeSecQnA(question,answer);
+                break;
+            default:
+                // brings the user back to the previous menu
+                int input = userMenu();
+                userSwitch(input);
+                break;
+        }
     }
 
     //TODO write method
