@@ -55,7 +55,6 @@ public class User implements Serializable {
     }
 
     public void addNewBudget(double amount, Budget budget) {
-
     }
 
     public void deleteBudget(int choice) {
@@ -66,12 +65,6 @@ public class User implements Serializable {
     }
 
     public ArrayList<Budget> getBudgetList() { return budgetList; }
-
-    public void deposit(double amount, Budget budget) {
-    }
-
-    public void withdraw(double amount, Budget budget) {
-    }
 
     public User(String userName, String displayName, String password, String secQuestion, String secAnswer) {
         setUserName(userName);
