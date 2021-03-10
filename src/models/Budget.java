@@ -31,8 +31,12 @@ public class Budget implements Serializable {
 
     //TODO write method
     public double withdraw(double amount) {
+        if(funds - amount >= budgetAmount){
+            System.out.println("Unable to go over limit of " + amount + ". Transaction not tracked.");
+        }
+        else{
         fundsHistory.add(new FundsChangeRecord(funds, (funds - amount), "WITHDRAW"));
-        funds -= amount;
+        funds -= amount;}
         return funds;
     }
 

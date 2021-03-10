@@ -13,6 +13,7 @@ public class User implements Serializable {
     private String secQuestion;
     private String secAnswer;
     private ArrayList<Budget> budgetList;
+    private int budgetIndex;
 
     public String getUserName() {
         return userName;
@@ -54,8 +55,8 @@ public class User implements Serializable {
         this.secAnswer = secAnswer;
     }
 
-    public void addNewBudget(double amount, Budget budget) {
-
+    public void addNewBudget(Budget budget) {
+        budgetList.add(budgetIndex,budget);
     }
 
     public void deleteBudget(int choice) {
@@ -66,12 +67,6 @@ public class User implements Serializable {
     }
 
     public ArrayList<Budget> getBudgetList() { return budgetList; }
-
-    public void deposit(double amount, Budget budget) {
-    }
-
-    public void withdraw(double amount, Budget budget) {
-    }
 
     public User(String userName, String displayName, String password, String secQuestion, String secAnswer) {
         setUserName(userName);

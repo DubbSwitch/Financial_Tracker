@@ -181,18 +181,23 @@ public class MCBudgetController {
 
     private static void chooseBudget() {
         //Creates an array containing the names of all the user's budgets, for later menu display
-        String[] menu = new String[contextUser.getBudgetList().size()];
-        for (int i = 0; i < menu.length; i++) {
-            menu[i] = contextUser.getBudgetList().get(i).getName();
+        try {
+            String[] menu = new String[contextUser.getBudgetList().size()];
+            for (int i = 0; i < menu.length; i++) {
+                menu[i] = contextUser.getBudgetList().get(i).getName();
+            }
+
+            int input = ConsoleIO.promptForMenuSelection("Please select the budget you'd like to view:", menu, false);
+            budgetOptionsSwitch(budgetOptionsMenu(), contextUser.getBudgetList().get(input - 1));
+        }catch (NullPointerException nfe){
+            System.out.println("There are no budgets associated with your account");
+            userSwitch(1);
         }
-
-        int input = ConsoleIO.promptForMenuSelection("Please select the budget you'd like to view:", menu,false);
-        budgetOptionsSwitch(budgetOptionsMenu(), contextUser.getBudgetList().get(input - 1));
-
     }
 
     //TODO write method
-    private static void createBudget(double funds, String name) {
+    private static void createBudget(double maxAmount, String name) {
+        contextUser.addNewBudget(new Budget(maxAmount,name));
 
     }
 
