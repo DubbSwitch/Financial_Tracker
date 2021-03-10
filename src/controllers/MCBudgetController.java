@@ -56,19 +56,23 @@ public class MCBudgetController {
         String username = ConsoleIO.promptForString("Enter your Username: ", false);
         // added a try catch because if their was no users created it would cause a NulLPointerError
         String password = ConsoleIO.promptForString("Enter your password: ", false);
+        boolean success = false;
         try {
             contextUser = UserContextController.findUser(iodataModel, username);
             if (contextUser.getUserName().equals(username) && contextUser.getPassword().equals(password)) {
-                int choice = userMenu();
-                userSwitch(choice);
+                success = true;
             } else {
                 System.out.println("Password was incorrect: ");
-                run();
+
             }
         } catch (NullPointerException nfe) {
             System.out.println("User: '" + username + "', does not exist.");
-            run();
         }
+        if(success){
+            int choice = userMenu();
+            userSwitch(choice);
+        }
+        else{run();}
     }
 
     private static void createUser() {
@@ -168,7 +172,8 @@ public class MCBudgetController {
                 String name = ConsoleIO.promptForString("Enter name of budget: ", false);
                 int funds = ConsoleIO.promptForInt("Amount of money usable: ", 1, 200000000);
                 createBudget(funds, name);
-                userSwitch(1);
+                int path = budgetingMenu();
+                budgetingSwitch(path);
                 break;
             case 3:
                 savingsMenu();
@@ -191,7 +196,8 @@ public class MCBudgetController {
             budgetOptionsSwitch(budgetOptionsMenu(), contextUser.getBudgetList().get(input - 1));
         }catch (NullPointerException nfe){
             System.out.println("There are no budgets associated with your account");
-            userSwitch(1);
+            int path = budgetingMenu();
+            budgetingSwitch(path);
         }
     }
 

@@ -21,7 +21,8 @@ public class FileController {
     }
 
     public IODataModel readDirectory(FileConfigurations fileConfig) throws IOException, ClassNotFoundException {
-        File Dir = new File(new ConsoleIO().promptForString("Enter the path you would like to read saved data from: ", false));
+        File Dir = new File("SavePath");
+    //  File Dir = new File(new ConsoleIO().promptForString("Enter the path you would like to read saved data from: ", false));
         FilenameFilter filter = (f, name) -> name.endsWith(".bdjc");
         String[] pathsToFiles = Dir.list(filter);
         if (pathsToFiles != null) {
