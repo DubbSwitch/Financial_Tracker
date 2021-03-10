@@ -12,7 +12,7 @@ public class User implements Serializable {
     private String password;
     private String secQuestion;
     private String secAnswer;
-    private ArrayList<Budget> budgetList;
+    private ArrayList<Budget> budgetList = new ArrayList<>();
     private int budgetIndex = 0;
 
     public String getUserName() {
