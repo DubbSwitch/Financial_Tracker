@@ -9,7 +9,7 @@ import java.util.ArrayList;
 //TODO: IF YOU MODIFY THIS CLASS IN ANY WAY, YOU MUST UPDATE serialVersionUID TO A VALID SERIAL VERSION ACROSS ALL SERIALIZABLE CLASSES!!
 
 public class Budget implements Serializable {
-    private static final long serialVersionUID = 4L;
+    private static final long serialVersionUID = 5L
     private ArrayList<BudgetChangeRecord> budgetOverTime = new ArrayList<>();
     private ArrayList<FundsChangeRecord> fundsHistory = new ArrayList<>();
     private double funds;
