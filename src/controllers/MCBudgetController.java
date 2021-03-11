@@ -87,7 +87,7 @@ public class MCBudgetController {
         // user is a place holder strictly for testing
         // the end of this method should create a new file with the user's information.
         //TODO validate save
-        System.out.println("User " + displayName + " succesfully created. Please log in.");
+        System.out.println("User " + displayName + " successfully created. Please log in.");
         contextUser = new User(userName, displayName, password, question, answer);
         iodataModel.addUser(contextUser); //Make sure the user is saved
         run();
@@ -204,8 +204,9 @@ public class MCBudgetController {
 
     //finished
     private static void createBudget(double maxAmount,double funds, String name) {
-        contextBudget = new Budget(maxAmount,funds,name);
-        contextUser.addNewBudget(contextBudget);
+        Budget newB = new Budget(maxAmount,funds,name);
+        contextUser.addNewBudget(newB);
+        contextBudget = newB;
         budgetOptionsSwitch(budgetOptionsMenu(), contextBudget);
     }
 
@@ -322,13 +323,13 @@ public class MCBudgetController {
 
     //TODO write method
     private static void viewTransactionHistory(Budget budget) {
-        if (contextBudget.getFundsChangeRecord().size() > 0) {
+        if (budget.getFundsChangeRecord().size() > 0) {
             System.out.println("╔═══════════════════════╦════════════════════╦═══════════════════╗");
             System.out.println("║     DATE AND TIME     ║       CHANGE       ║    NEW BALANCE    ║");
             System.out.println("╠═══════════════════════╬════════════════════╬═══════════════════╣");
-            for (int i = 0; i < contextBudget.getFundsChangeRecord().size(); i++) {
-                System.out.println(contextBudget.getFundsChangeRecord().get(i).toString());
-                if (!(i + 1 == contextBudget.getFundsChangeRecord().size())) {
+            for (int i = 0; i < budget.getFundsChangeRecord().size(); i++) {
+                System.out.println(budget.getFundsChangeRecord().get(i).toString());
+                if (!(i + 1 == budget.getFundsChangeRecord().size())) {
                     System.out.println("╠═══════════════════════╬════════════════════╬═══════════════════╣");
                 } else {
                     System.out.println("╠═══════════════════════╩════════════════════╩═══════════════════╣");
@@ -342,11 +343,10 @@ public class MCBudgetController {
             }
             System.out.println("║  " + filler + "Current Balance: $" + currentBalanceDisplay + "  ║");
             System.out.println("╚════════════════════════════════════════════════════════════════╝\n\n");
-            budgetOptionsSwitch(budgetOptionsMenu(),contextBudget);
         } else {
             System.out.println("\nNo transaction history exists.\n");
-            budgetOptionsSwitch(budgetOptionsMenu(),contextBudget);
         }
+        budgetOptionsSwitch(budgetOptionsMenu(),budget);
     }
 
     //TODO write method
@@ -409,18 +409,21 @@ public class MCBudgetController {
 
     //Finished
     private static void changeDisplayName(String newName) { // TESTED: works as intended
+        System.out.println("Display name changed to " + newName + ".");
         contextUser.setDisplayName(newName);
         userSwitch(2); // This automatically takes the user back to the account settings menu
     }
 
     //Finished
     private static void changePassword(String newPassword) { //TESTED: works as intended
+        System.out.println("Password changed.");
         contextUser.setPassword(newPassword);
         userSwitch(2);
     }
 
     //Finished
     private static void changeSecQnA(String question, String answer) {
+        System.out.println("Security questions changed.");
         contextUser.setSecQuestion(question);
         contextUser.setSecAnswer(answer);
         userSwitch(2);
