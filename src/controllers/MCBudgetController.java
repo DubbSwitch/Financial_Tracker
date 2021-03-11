@@ -119,7 +119,7 @@ public class MCBudgetController {
     //Finished
     private static int userMenu() {
         String[] menu = {"Budgeting", "Account Settings", "Logout"};
-        return ConsoleIO.promptForMenuSelection("Welcome "  + contextUser.getDisplayName() + ",\n",menu, false);
+        return ConsoleIO.promptForMenuSelection("Welcome "  + contextUser.getDisplayName() + ",",menu, false);
     }
 
     //      //
@@ -167,9 +167,9 @@ public class MCBudgetController {
                 chooseBudget();
                 break;
             case 2:
-                String name = ConsoleIO.promptForString("Enter name of budget: ", false);
-                int funds = ConsoleIO.promptForInt("Amount of money usable: ", 1, 200000000);
-                int amount = ConsoleIO.promptForInt("Max amount: ", 1, 200000000);
+                String name = ConsoleIO.promptForString("Please enter a name for your budget: ", false);
+                int amount = ConsoleIO.promptForInt("Please enter the cap for your budget:", 1, 200000000);
+                int funds = ConsoleIO.promptForInt("Please enter how much you've already spent on this budget:", 1, 200000000);
 
                 createBudget(amount,funds,name);
                 budgetingSwitch(budgetingMenu());
@@ -300,7 +300,13 @@ public class MCBudgetController {
 
     //TODO write method
     private static void deleteBudget(Budget budget) {
-
+        for (int i = 0; i < contextUser.getBudgetList().size(); i++) {
+            if (contextUser.getBudgetList().get(i) == contextBudget) {
+                contextBudget = null;
+                contextUser.getBudgetList().remove(i);
+                budgetingSwitch(budgetingMenu());
+            }
+        }
     }
 
     //TODO write method
