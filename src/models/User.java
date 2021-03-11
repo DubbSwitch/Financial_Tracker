@@ -12,7 +12,7 @@ public class User implements Serializable {
     private String password;
     private String secQuestion;
     private String secAnswer;
-    private final ArrayList<Budget> budgetList = new ArrayList<>();
+    private ArrayList<Budget> budgetList = new ArrayList<>();
     private int budgetIndex = 0;
 
     public String getUserName() {
@@ -56,6 +56,8 @@ public class User implements Serializable {
     }
 
     public void addNewBudget(Budget budget) {
+        if(budgetIndex == 0)
+        budgetList = new ArrayList<>();
         try {
             budgetList.add(budgetIndex, budget);
             budgetIndex++;

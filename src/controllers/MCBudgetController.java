@@ -12,7 +12,6 @@ import java.util.ArrayList;
 
 public class MCBudgetController {
     private static final FileConfigurations fileConfigurations = new FileConfigurations();
-    static User user; // This variable is being used to test methods while data persistence is still being setup
     static IODataModel iodataModel = new IODataModel(); //Use for saving data, and managing users.
     static UserContextController UserContextController = new UserContextController();
     static User contextUser; //current user
