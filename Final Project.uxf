@@ -141,7 +141,8 @@ _-modifySavings(amount : double, choice : int) : void_
 
 _-budgetOptionsMenu() : int_
 _-budgetOptionsSwitch(choice :int) : void_
-_-modifyBudgetMenu() : void_
+_-modifyBudgetFundsMenu(budget : Budget) : void_
+_-modifyBudgetCapMenu(budget : Budget) : void_
 _-viewTransactionHistory(budget : Budget)  : void_
 _-deleteBudget(budget : Budget) : void_
 _-renameBudget(budget : Budget, newName : String) : void_

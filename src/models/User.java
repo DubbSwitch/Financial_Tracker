@@ -66,13 +66,6 @@ public class User implements Serializable {
         }
     }
 
-    public void deleteBudget(int choice) {
-        if (choice == 0) {
-            System.out.println("There are no budgets to delete");
-        } else
-            budgetList.remove(choice - 1);
-    }
-
     public ArrayList<Budget> getBudgetList() { return budgetList; }
 
     public User(String userName, String displayName, String password, String secQuestion, String secAnswer) {

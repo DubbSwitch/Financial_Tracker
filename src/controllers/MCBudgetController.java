@@ -5,10 +5,13 @@ import models.Budget;
 import models.FileConfigurations;
 import models.IODataModel;
 import models.User;
+import views.ConsoleIO2;
 
 import java.io.IOException;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.nio.file.Paths;
-import java.util.ArrayList;
+import java.text.DecimalFormat;
 
 public class MCBudgetController {
     private static final FileConfigurations fileConfigurations = new FileConfigurations();
@@ -169,12 +172,10 @@ public class MCBudgetController {
                 break;
             case 2:
                 String name = ConsoleIO.promptForString("Enter name of budget: ", false);
-                int funds = ConsoleIO.promptForInt("Amount of money usable: ", 1, 200000000);
-                int amount = ConsoleIO.promptForInt("Max amount: ", 1, 200000000);
+                double amount = ConsoleIO2.promptForDouble("Max amount: ", 1, 200000000);
 
-                createBudget(amount,funds,name);
-                int path = budgetingMenu();
-                budgetingSwitch(path);
+                createBudget(amount,amount,name);
+                budgetingSwitch(budgetingMenu());
                 break;
             case 3:
                 savingsMenu();
@@ -219,9 +220,11 @@ public class MCBudgetController {
     //         //
 
     //TODO write method
-    private static void modifySavingsAmount(double amount, int choice) {
 
-    }
+
+    /*private static void modifySavingsAmount(double amount, int choice) {
+
+    }*/
 
     //       //
     // MENUS //
@@ -229,7 +232,7 @@ public class MCBudgetController {
 
     //Finished
     private static int budgetOptionsMenu() {
-        String[] menu = {"Modify Budget","View History","Rename Budget","Delete Budget"};
+        String[] menu = {"New Transaction","View History","Change Budget Cap","Rename Budget","Delete Budget"};
         return ConsoleIO.promptForMenuSelection(contextBudget.toString(), menu,true);
     }
 
@@ -237,15 +240,18 @@ public class MCBudgetController {
     private static void budgetOptionsSwitch(int choice, Budget budget) {
         switch (choice) {
             case 1:
-                modifyBudgetMenu();
+                modifyBudgetFundsMenu();
                 break;
             case 2:
                 viewTransactionHistory(budget);
                 break;
             case 3:
-                renameBudget(budget, ConsoleIO.promptForString("Please enter a new name for the budget:",false));
+                modifyBudgetCapMenu();
                 break;
             case 4:
+                renameBudget(budget, ConsoleIO.promptForString("Please enter a new name for the budget:",false));
+                break;
+            case 5:
                 String response = ConsoleIO.promptForString("Warning: Deleting a budget and its full transaction history is permanent and cannot be undone.\nTo confirm deletion, please enter your password.", true);
                 if (response.equals(contextUser.getPassword())) {
                     deleteBudget(budget);
@@ -262,27 +268,34 @@ public class MCBudgetController {
     }
 
     //finished
-    private static void modifyBudgetMenu() {
-        String[] menu = {"Deposit","Withdraw","Edit Maximum"};
+    private static void modifyBudgetFundsMenu() {
+        String[] menu = {"New Expense","Remove Expense"};
         int choice =  ConsoleIO.promptForMenuSelection("",menu,true);
         switch (choice){
             case 1:
-                int in = ConsoleIO.promptForInt("Enter how much you would like to deposit: ",1,99999999);
+                double in = ConsoleIO2.promptForDouble("Enter how much you would like to deposit: ",1,999999999);
+                in = round(in,4);
                 contextBudget.deposit(in);
                 break;
             case 2:
-                int out = ConsoleIO.promptForInt( "Enter you expense costs: ",1,99999999);
+                double out = ConsoleIO2.promptForDouble( "Enter you expense costs: ",1,99999999);
+                out = round(out,2);
                 contextBudget.withdraw(out);
-                break;
-            case 3:
-                int max = ConsoleIO.promptForInt("Enter new Maximum: ",1,999999999);
-                contextBudget.setBudgetAmount(max);
                 break;
             case 0:
                 break;
         }
-        int input = budgetOptionsMenu();
-        budgetOptionsSwitch(input,contextBudget);
+        budgetOptionsSwitch(budgetOptionsMenu(),contextBudget);
+    }
+
+    private static void modifyBudgetCapMenu() {
+        int prompt = ConsoleIO.promptForInt("Enter a new budget cap.",1,999999999);
+        if (prompt >= contextBudget.getFunds()) {
+            contextBudget.setBudgetAmount(prompt);
+        } else {
+            System.out.println("You cannot set the budget cap lower than the current funds.");
+        }
+        budgetOptionsSwitch(budgetOptionsMenu(),contextBudget);
     }
 
     //TODO write method
@@ -292,7 +305,13 @@ public class MCBudgetController {
 
     //TODO write method
     private static void deleteBudget(Budget budget) {
-
+        for (int i = 0; i < contextUser.getBudgetList().size(); i++) {
+            if (contextUser.getBudgetList().get(i) == contextBudget) {
+                contextBudget = null;
+                contextUser.getBudgetList().remove(i);
+                budgetingSwitch(budgetingMenu());
+            }
+        }
     }
 
     //TODO write method
@@ -384,5 +403,12 @@ public class MCBudgetController {
             System.out.println("Failed to save data.");
             //e.printStackTrace();
         }
+    }
+    public static double round(double value, int places) {
+        if (places < 0) throw new IllegalArgumentException();
+
+        BigDecimal bd = BigDecimal.valueOf(value);
+        bd = bd.setScale(places, RoundingMode.HALF_UP);
+        return bd.doubleValue();
     }
 }
