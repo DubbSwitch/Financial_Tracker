@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <diagram program="umlet" version="14.3.0">
-  <zoom_level>12</zoom_level>
+  <zoom_level>5</zoom_level>
   <element>
     <id>UMLPackage</id>
     <coordinates>
-      <x>816</x>
-      <y>240</y>
-      <w>732</w>
-      <h>912</h>
+      <x>345</x>
+      <y>160</y>
+      <w>360</w>
+      <h>590</h>
     </coordinates>
     <panel_attributes>controllers
 --
@@ -17,10 +17,10 @@ bg=blue</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>828</x>
-      <y>276</y>
-      <w>132</w>
-      <h>84</h>
+      <x>440</x>
+      <y>90</y>
+      <w>55</w>
+      <h>35</h>
     </coordinates>
     <panel_attributes>Main
 -
@@ -32,10 +32,10 @@ run();</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>2016</x>
-      <y>156</y>
-      <w>828</w>
-      <h>612</h>
+      <x>870</x>
+      <y>165</y>
+      <w>345</w>
+      <h>230</h>
     </coordinates>
     <panel_attributes>User
 -
@@ -71,10 +71,10 @@ run();</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1680</x>
-      <y>156</y>
-      <w>300</w>
-      <h>252</h>
+      <x>740</x>
+      <y>165</y>
+      <w>125</w>
+      <h>105</h>
     </coordinates>
     <panel_attributes>Budget
 -
@@ -94,10 +94,10 @@ run();</panel_attributes>
   <element>
     <id>UMLPackage</id>
     <coordinates>
-      <x>1632</x>
-      <y>96</y>
-      <w>1272</w>
-      <h>816</h>
+      <x>730</x>
+      <y>140</y>
+      <w>515</w>
+      <h>560</h>
     </coordinates>
     <panel_attributes>models
 --
@@ -107,12 +107,18 @@ bg=green</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>828</x>
-      <y>372</y>
-      <w>456</w>
-      <h>768</h>
+      <x>360</x>
+      <y>175</y>
+      <w>190</w>
+      <h>350</h>
     </coordinates>
     <panel_attributes>MCBudgeting
+-
+_-fileConfigurations = new FileConfigurations(); : FileConfigurations_
+_~iodataModel = new IODataModel();  : IODataModel_
+_~UserContextController = new UserContextController(); : UserContextController_
+_~contextUser : User_
+_~contextBudget : Budget_
 -
 _-currentUser : User_
 _-currentBudget : Budget_
@@ -154,16 +160,19 @@ _-changeDisplayName(newName : String) : void_
 _-changePassword(newPassword : String) : void_
 _-changeSecQnA(question : String, answer :String) : void_
 
+_-save() : void_
+_-load() : void_
+_+round(value : double,places : int) : double
 layer=1</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>24</x>
-      <y>396</y>
-      <w>576</w>
-      <h>156</h>
+      <x>10</x>
+      <y>175</y>
+      <w>275</w>
+      <h>65</h>
     </coordinates>
     <panel_attributes>ConsoleIO
 -
@@ -172,62 +181,16 @@ layer=1</panel_attributes>
 _+promptForString(prompt : String, allowBlank : boolean) : String_
 _+promptForInt(prompt : String, min : int, max : int) : int_
 _+promptForBoolean(prompt : String, trueString : String, falseString : String) : boolean_
-_+promptForMenu(menu : String[]) : </panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>Text</id>
-    <coordinates>
-      <x>1308</x>
-      <y>588</y>
-      <w>228</w>
-      <h>96</h>
-    </coordinates>
-    <panel_attributes>userMenu
-1. Budgeting
-2. Account Settings
-3. Log out
-style=wordwrap</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>Text</id>
-    <coordinates>
-      <x>1308</x>
-      <y>684</y>
-      <w>228</w>
-      <h>120</h>
-    </coordinates>
-    <panel_attributes>budgetingMenu
-1. Select Budget
-2. Create Budget
-3. Savings
-style=wordwrap</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>Text</id>
-    <coordinates>
-      <x>1308</x>
-      <y>780</y>
-      <w>228</w>
-      <h>168</h>
-    </coordinates>
-    <panel_attributes>budgetOptionsMenu
-1. Modify Budget
-2. View History
-3. Rename Budget
-4. Delete Budget
-style=wordwrap</panel_attributes>
+_+promptForMenu(prompt : String, menu : String[], allowBlank : boolean) : int_</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>48</x>
-      <y>564</y>
-      <w>408</w>
-      <h>120</h>
+      <x>55</x>
+      <y>245</y>
+      <w>170</w>
+      <h>50</h>
     </coordinates>
     <panel_attributes>FileIO
 -
@@ -239,28 +202,260 @@ _+readTextFromFile(filePath : String) : String_
     <additional_attributes/>
   </element>
   <element>
-    <id>Text</id>
-    <coordinates>
-      <x>1920</x>
-      <y>0</y>
-      <w>168</w>
-      <h>84</h>
-    </coordinates>
-    <panel_attributes>FileIO is the class used to make all of our data persistent.
-style=wordwrap</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
     <id>UMLPackage</id>
     <coordinates>
       <x>0</x>
-      <y>360</y>
-      <w>708</w>
-      <h>444</h>
+      <y>160</y>
+      <w>295</w>
+      <h>210</h>
     </coordinates>
     <panel_attributes>views
 --
 bg=red</panel_attributes>
     <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>5</x>
+      <y>305</y>
+      <w>275</w>
+      <h>45</h>
+    </coordinates>
+    <panel_attributes>ConsoleIO2
+-
+
+-
+
+_+promptForDouble(prompt : String, min : double, max : double) : double_
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLPackage</id>
+    <coordinates>
+      <x>415</x>
+      <y>70</y>
+      <w>110</w>
+      <h>75</h>
+    </coordinates>
+    <panel_attributes>prog
+--
+bg=orange</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>745</x>
+      <y>625</y>
+      <w>170</w>
+      <h>65</h>
+    </coordinates>
+    <panel_attributes>FileConfigurations
+-
+_-final serialVersionUID = 4L; : long_
+-path : Path
+-
++setPath(path: Path) : void
++getPath() : path</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>350</x>
+      <y>675</y>
+      <w>225</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>FileController
+-
+~fileConfig = new FileConfigurations : FileConfigurations
+-
++writeToFile(data : IODataModel, fileConfig :FileConfigurations) : void
++readFromFile(file : File) : Object
++readDirectory(fileConfig : FileConfigurations) : IODataModel
+-generateFilenameDate() : String </panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>930</x>
+      <y>495</y>
+      <w>300</w>
+      <h>125</h>
+    </coordinates>
+    <panel_attributes>FundsChangeRecord
+-
+_-final serialVersionUID = 4L; : long_
+_-final dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy HH-mm-ss-ms : DateTimeFormatter_
+_-final now = LocalDateTime.now() : LocalDateTime_
+_-final timestamp = dtf.format(now) : String_
+_-final recordID = String.valueOf(timestamp.hashcode()) : String_	
+_-final fromFundsAvailable : double_
+_-final toFundsAvailable :double_
+-
++BudgetChangeRecord(final fromFundsAvailable : double, final toFundsAvailable : double)
++getTimestamp() : String
++getPreviousFundsAvailable() : double
++getToNewFundsAvailable() : double
++getRecordID() : String
++toString() : String</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>350</x>
+      <y>575</y>
+      <w>205</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>UserContextController
+-
+
+-
++findUser(iodataModel :IODataModel, userName : String) : User</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>740</x>
+      <y>525</y>
+      <w>185</w>
+      <h>85</h>
+    </coordinates>
+    <panel_attributes>IODataModel
+-
+_-final serialVersionUID = 5L; : long_
+_-final validBudget = new ArrayList&lt;&gt;(); : ArrayList&lt;Budget&gt;_
+_-final validUsers = new ArrayList&lt;&gt;(); : ArrayList&lt;User&gt;_
+-
++addUser(user : User) : void
++addBudget(budget : Budget) : void
++getBudget() : ArrayList&lt;Budget&gt;
++getUsers() : ArrayList&lt;User&gt;
++toString() : String &lt;&lt;override&gt;&gt;</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>350</x>
+      <y>620</y>
+      <w>275</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>ObjectIO
+-
+
+-
+~getOutputStream(fileOutputSteam : FileOutputStream) : ObjectOutputStream
+~getInputStream(fileOutputSteam : FileOutputStream) : ObjectOutputStream</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>455</x>
+      <y>120</y>
+      <w>15</w>
+      <h>65</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;110.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>545</x>
+      <y>265</y>
+      <w>260</w>
+      <h>190</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;360.0;500.0;360.0;500.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>275</x>
+      <y>210</y>
+      <w>60</w>
+      <h>130</h>
+    </coordinates>
+    <panel_attributes>lt=.
+</panel_attributes>
+    <additional_attributes>10.0;240.0;100.0;240.0;100.0;10.0;20.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>220</x>
+      <y>260</y>
+      <w>145</w>
+      <h>20</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+&lt;&lt;instanceOf&gt;&gt;</panel_attributes>
+    <additional_attributes>270.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>570</x>
+      <y>620</y>
+      <w>185</w>
+      <h>85</h>
+    </coordinates>
+    <panel_attributes>lt=-</panel_attributes>
+    <additional_attributes>10.0;150.0;210.0;150.0;210.0;10.0;260.0;10.0;260.0;80.0;350.0;80.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>620</x>
+      <y>440</y>
+      <w>65</w>
+      <h>195</h>
+    </coordinates>
+    <panel_attributes>lt=-</panel_attributes>
+    <additional_attributes>110.0;10.0;110.0;370.0;10.0;370.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>550</x>
+      <y>440</y>
+      <w>60</w>
+      <h>160</h>
+    </coordinates>
+    <panel_attributes>lt=-</panel_attributes>
+    <additional_attributes>100.0;10.0;100.0;300.0;10.0;300.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>790</x>
+      <y>440</y>
+      <w>315</w>
+      <h>20</h>
+    </coordinates>
+    <panel_attributes>lt=-</panel_attributes>
+    <additional_attributes>10.0;10.0;610.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1090</x>
+      <y>385</y>
+      <w>15</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>lt=-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;220.0</additional_attributes>
   </element>
 </diagram>
