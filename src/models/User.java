@@ -12,7 +12,7 @@ public class User implements Serializable {
     private String password;
     private String secQuestion;
     private String secAnswer;
-    private ArrayList<Budget> budgetList = new ArrayList<>();
+    private final ArrayList<Budget> budgetList = new ArrayList<>();
     private int budgetIndex = 0;
 
     public String getUserName() {
@@ -59,7 +59,7 @@ public class User implements Serializable {
         try {
             budgetList.add(budgetIndex, budget);
             budgetIndex++;
-        }catch (NullPointerException nfe){
+        }catch (NullPointerException npe){
             System.out.println("NullPointerException has been caught, this method is doing something wrong.");
         }
     }
