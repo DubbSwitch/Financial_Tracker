@@ -15,6 +15,7 @@ public class MCBudgetController {
     static IODataModel iodataModel = new IODataModel(); //Use for saving data, and managing users.
     static UserContextController UserContextController = new UserContextController();
     static User contextUser; //current user
+    static Budget contextBudget;
 
     public static void run() {
         int choice = homeMenu();
@@ -169,7 +170,9 @@ public class MCBudgetController {
             case 2:
                 String name = ConsoleIO.promptForString("Enter name of budget: ", false);
                 int funds = ConsoleIO.promptForInt("Amount of money usable: ", 1, 200000000);
-                createBudget(funds, name);
+                int amount = ConsoleIO.promptForInt("Max amount: ", 1, 200000000);
+
+                createBudget(amount,funds,name);
                 int path = budgetingMenu();
                 budgetingSwitch(path);
                 break;
@@ -181,7 +184,6 @@ public class MCBudgetController {
                 userSwitch(input);
         }
     }
-
     // Finished
     private static void chooseBudget() {
         //Creates an array containing the names of all the user's budgets, for later menu display
@@ -192,7 +194,9 @@ public class MCBudgetController {
             }
 
             int input = ConsoleIO.promptForMenuSelection("Please select the budget you'd like to view:", menu, false);
-            budgetOptionsSwitch(budgetOptionsMenu(), contextUser.getBudgetList().get(input - 1));
+            contextBudget = contextUser.getBudgetList().get(input -1);
+            //  budgetOptionsSwitch(budgetOptionsMenu(), contextUser.getBudgetList().get(input - 1));
+            budgetOptionsSwitch(budgetOptionsMenu(), contextBudget);
         }catch (NullPointerException nfe){
             System.out.println("There are no budgets associated with your account");
             int path = budgetingMenu();
@@ -201,8 +205,8 @@ public class MCBudgetController {
     }
 
     //finished
-    private static void createBudget(double maxAmount, String name) {
-        contextUser.addNewBudget(new Budget(maxAmount,name));
+    private static void createBudget(double maxAmount,double funds, String name) {
+        contextUser.addNewBudget(new Budget(maxAmount,funds,name));
     }
 
     //TODO write method
@@ -226,7 +230,7 @@ public class MCBudgetController {
     //Finished
     private static int budgetOptionsMenu() {
         String[] menu = {"Modify Budget","View History","Rename Budget","Delete Budget"};
-        return ConsoleIO.promptForMenuSelection("", menu,true);
+        return ConsoleIO.promptForMenuSelection(contextBudget.toString(), menu,true);
     }
 
     //Finished
@@ -251,14 +255,34 @@ public class MCBudgetController {
                 }
                 break;
             case 0:
+                contextBudget = null;
                 userSwitch(1);
                 break;
         }
     }
 
-    //TODO write method
+    //finished
     private static void modifyBudgetMenu() {
-
+        String[] menu = {"Deposit","Withdraw","Edit Maximum"};
+        int choice =  ConsoleIO.promptForMenuSelection("",menu,true);
+        switch (choice){
+            case 1:
+                int in = ConsoleIO.promptForInt("Enter how much you would like to deposit: ",1,99999999);
+                contextBudget.deposit(in);
+                break;
+            case 2:
+                int out = ConsoleIO.promptForInt( "Enter you expense costs: ",1,99999999);
+                contextBudget.withdraw(out);
+                break;
+            case 3:
+                int max = ConsoleIO.promptForInt("Enter new Maximum: ",1,999999999);
+                contextBudget.setBudgetAmount(max);
+                break;
+            case 0:
+                break;
+        }
+        int input = budgetOptionsMenu();
+        budgetOptionsSwitch(input,contextBudget);
     }
 
     //TODO write method
