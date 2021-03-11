@@ -11,7 +11,6 @@ import java.util.ArrayList;
 
 public class Budget implements Serializable {
     private static final long serialVersionUID = 4L;
-    private ArrayList<BudgetChangeRecord> budgetOverTime = new ArrayList<>();
     private final ArrayList<FundsChangeRecord> fundsHistory = new ArrayList<>();
     private double funds;
     private double budgetAmount;
@@ -33,26 +32,9 @@ public class Budget implements Serializable {
 
     //TODO write method
     public double withdraw(double amount) {
-        if(funds - amount >= budgetAmount){
-            System.out.println("Unable to go over limit of " + amount + ". Transaction not tracked.");
-        }
-        else{
         fundsHistory.add(new FundsChangeRecord(funds, (funds - amount), "WITHDRAW"));
-        funds -= amount;}
+        funds -= amount;
         return funds;
-    }
-
-    private void changeBudget(double newBudgetAmount) {
-        budgetOverTime.add(new BudgetChangeRecord(budgetAmount, newBudgetAmount));
-        budgetAmount = newBudgetAmount;
-    }
-
-    public ArrayList<BudgetChangeRecord> getBudgetOverTime() {
-        return budgetOverTime;
-    }
-
-    public void setBudgetOverTime(ArrayList<BudgetChangeRecord> budgetOverTime) {
-        this.budgetOverTime = budgetOverTime;
     }
 
     public double getFunds() {
