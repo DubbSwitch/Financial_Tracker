@@ -297,7 +297,9 @@ public class MCBudgetController {
 
     //TODO write method
     private static void renameBudget(Budget budget, String newName) {
-
+        budget.setName(newName);
+        int input = budgetOptionsMenu();
+        budgetOptionsSwitch(input,contextBudget);
     }
 
     //Finished
