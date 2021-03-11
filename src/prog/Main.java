@@ -8,6 +8,7 @@ public class Main {
 
     public static void run() {
         try {
+
             MCBudgetController.run();
         }catch (NullPointerException nullPointerException) {
             System.out.println("^.^");

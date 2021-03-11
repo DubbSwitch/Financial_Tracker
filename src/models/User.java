@@ -15,7 +15,6 @@ public class User implements Serializable {
     private String secQuestion;
     private String secAnswer;
     private ArrayList<Budget> budgetList = new ArrayList<>();
-    private int budgetIndex = 0;
 
     public String getUserName() {
         return userName;
@@ -58,11 +57,8 @@ public class User implements Serializable {
     }
 
     public void addNewBudget(Budget budget) {
-        if(budgetIndex == 0)
-        budgetList = new ArrayList<>();
         try {
-            budgetList.add(budgetIndex, budget);
-            budgetIndex++;
+            budgetList.add(budget);
         }catch (NullPointerException npe){
             System.out.println("NullPointerException has been caught, this method is doing something wrong.");
         }

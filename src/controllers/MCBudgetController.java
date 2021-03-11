@@ -11,7 +11,7 @@ import java.io.InvalidClassException;
 import java.io.NotSerializableException;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.util.Locale;
+
 
 public class MCBudgetController {
     static IODataModel iodataModel = new IODataModel(); //Use for saving data, and managing users.
@@ -168,7 +168,7 @@ public class MCBudgetController {
             case 2:
                 String name = ConsoleIO.promptForString("Please enter a name for your new budget: ", false);
                 double maxAmount = ConsoleIO2.promptForDouble("Please enter the maximum spending cap for your new budget: ", 1, 200000000);
-                double funds = ConsoleIO2.promptForDouble("Please enter how much you've already spent towards this budget: ", 1, 200000000);
+                double funds = ConsoleIO2.promptForDouble("Please enter how much you've already spent towards this budget: ", 0, maxAmount);
 
                 createBudget(maxAmount,funds,name);
                 break;
