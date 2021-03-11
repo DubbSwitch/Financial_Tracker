@@ -11,7 +11,6 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.nio.file.Paths;
-import java.text.DecimalFormat;
 
 public class MCBudgetController {
     private static final FileConfigurations fileConfigurations = new FileConfigurations();
@@ -388,13 +387,11 @@ public class MCBudgetController {
     //                  //
 
     private static void save() {
-        int swc = 2;
         if (fileConfigurations.getPath() != null) {
             System.out.println("Use saved path: '" + fileConfigurations.getPath() + "'?");
             ConsoleIO.promptForMenuSelection(" ", new String[]{"Yes", "No"}, false);
         }
-        if (swc == 2)
-            fileConfigurations.setPath(Paths.get(ConsoleIO.promptForString("Path to save data to: ", false)));
+        fileConfigurations.setPath(Paths.get(ConsoleIO.promptForString("Path to save data to: ", false)));
         try {
             new FileController().writeToFile(iodataModel, fileConfigurations);
             System.out.println("Saved!");
