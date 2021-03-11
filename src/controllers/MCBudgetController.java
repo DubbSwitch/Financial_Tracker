@@ -444,9 +444,8 @@ public class MCBudgetController {
     private static void save() {
         if (fileConfigurations.getPath() != null) {
             System.out.println("Use saved path: '" + fileConfigurations.getPath() + "'?");
-            ConsoleIO.promptForMenuSelection(" ", new String[]{"Yes", "No"}, false);
         }
-        fileConfigurations.setPath(Paths.get(ConsoleIO.promptForString("Path to save data to: ", false)));
+        fileConfigurations.setPath(Paths.get("SavePath"));
         try {
             new FileController().writeToFile(iodataModel, fileConfigurations);
             System.out.println("Saved!");
