@@ -4,7 +4,6 @@ import lib.ConsoleIO;
 import models.Budget;
 import models.FileConfigurations;
 import models.IODataModel;
-import models.Records.FundsChangeRecord;
 import models.User;
 import views.ConsoleIO2;
 
@@ -12,7 +11,6 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.nio.file.Paths;
-import java.util.ArrayList;
 
 public class MCBudgetController {
     private static final FileConfigurations fileConfigurations = new FileConfigurations();
@@ -253,7 +251,7 @@ public class MCBudgetController {
             case 5:
                 String response = ConsoleIO.promptForString("Warning: Deleting a budget and its full transaction history is permanent and cannot be undone.\nTo confirm deletion, please enter your password.", true);
                 if (response.equals(contextUser.getPassword())) {
-                    deleteBudget(budget);
+                    deleteBudget();
                 } else {
                     System.out.println("Incorrect password. Your budget has not been deleted.");
                     budgetOptionsSwitch(budgetOptionsMenu(), budget);
@@ -352,7 +350,7 @@ public class MCBudgetController {
     }
 
     //TODO write method
-    private static void deleteBudget(Budget budget) {
+    private static void deleteBudget() {
         for (int i = 0; i < contextUser.getBudgetList().size(); i++) {
             if (contextUser.getBudgetList().get(i) == contextBudget) {
                 contextBudget = null;
