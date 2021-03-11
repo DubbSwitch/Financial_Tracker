@@ -352,9 +352,10 @@ public class MCBudgetController {
             if (contextUser.getBudgetList().get(i) == contextBudget) {
                 contextBudget = null;
                 contextUser.getBudgetList().remove(i);
-                budgetingSwitch(budgetingMenu());
+
             }
         }
+        budgetingSwitch(budgetingMenu());
         save();
     }
 
