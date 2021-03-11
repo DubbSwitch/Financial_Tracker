@@ -12,8 +12,8 @@ public class BudgetChangeRecord implements Serializable {
     private final LocalDateTime now = LocalDateTime.now();
     private final String timestamp = dtf.format(now);
     private final String recordID = String.valueOf(timestamp.hashCode());
-    private double fromFundsAvailable;
-    private double toFundsAvailable;
+    private final double fromFundsAvailable;
+    private final double toFundsAvailable;
 
     public BudgetChangeRecord(final double fromFundsAvailable, final double toFundsAvailable) {
         this.fromFundsAvailable = fromFundsAvailable;

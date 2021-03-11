@@ -12,9 +12,9 @@ public class FundsChangeRecord implements Serializable  {
     private final LocalDateTime now = LocalDateTime.now();
     private final String timestamp = dtf.format(now);
     private final String recordID = String.valueOf(timestamp.hashCode());
-    private Double previousAvailableFundsAmount;
-    private Double newAvailableFundsAmount;
-    private String type;
+    private final Double previousAvailableFundsAmount;
+    private final Double newAvailableFundsAmount;
+    private final String type;
 
     public FundsChangeRecord(Double previousAvailableFundsAmount, Double newAvailableFundsAmount, String type) {
         this.previousAvailableFundsAmount = previousAvailableFundsAmount;

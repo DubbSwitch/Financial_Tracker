@@ -7,8 +7,8 @@ import java.util.ArrayList;
 
 public class IODataModel implements Serializable {
     private static final long serialVersionUID = 5L;
-    private ArrayList<Budget> validBudget = new ArrayList<>();
-    private ArrayList<User> validUsers = new ArrayList<>();
+    private final ArrayList<Budget> validBudget = new ArrayList<>();
+    private final ArrayList<User> validUsers = new ArrayList<>();
 
     public void addUser(User user) {
         validUsers.add(user);

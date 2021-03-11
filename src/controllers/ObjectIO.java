@@ -7,12 +7,10 @@ import java.io.*;
 
 public class ObjectIO {
     ObjectOutputStream getOutputStream(FileOutputStream fileOutputStream) throws IOException {
-        ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
-        return objectOutputStream;
+        return new ObjectOutputStream(fileOutputStream);
     }
 
     ObjectInputStream getInputStream(FileInputStream fileInputStream) throws IOException {
-        ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
-        return objectInputStream;
+        return new ObjectInputStream(fileInputStream);
     }
 }
