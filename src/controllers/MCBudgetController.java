@@ -361,8 +361,14 @@ public class MCBudgetController {
                 changeDisplayName(displayName);
                 break;
             case 2:
-                String password = ConsoleIO.promptForString("Please enter new password: ",false);
-                changePassword(password);
+                String response = ConsoleIO.promptForString("Please enter your old password: ", true);
+                if (response.equals(contextUser.getPassword())) {
+                    changePassword(ConsoleIO.promptForString("Please enter a new password: ",false));
+
+                } else {
+                    System.out.println("Incorrect password.");
+                    accountSettingsSwitch(accountSettingsMenu());
+                }
                 break;
             case 3:
                 String question = ConsoleIO.promptForString("Please enter a new security question: ",false);
