@@ -4,6 +4,8 @@
       <root url="jar://$PROJECT_DIR$/src/views/ConsoleIO.jar!/" />
     </CLASSES>
     <JAVADOC />
-    <SOURCES />
+    <SOURCES>
+      <root url="jar://$PROJECT_DIR$/src/views/ConsoleIO.jar!/" />
+    </SOURCES>
   </library>
 </component>

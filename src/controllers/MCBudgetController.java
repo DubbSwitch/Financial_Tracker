@@ -5,9 +5,13 @@ import models.Budget;
 import models.FileConfigurations;
 import models.IODataModel;
 import models.User;
+import views.ConsoleIO2;
 
 import java.io.IOException;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.nio.file.Paths;
+import java.text.DecimalFormat;
 
 public class MCBudgetController {
     private static final FileConfigurations fileConfigurations = new FileConfigurations();
@@ -119,7 +123,7 @@ public class MCBudgetController {
     //Finished
     private static int userMenu() {
         String[] menu = {"Budgeting", "Account Settings", "Logout"};
-        return ConsoleIO.promptForMenuSelection("Welcome "  + contextUser.getDisplayName() + ",",menu, false);
+        return ConsoleIO.promptForMenuSelection("Welcome "  + contextUser.getDisplayName() + ",\n",menu, false);
     }
 
     //      //
@@ -167,11 +171,10 @@ public class MCBudgetController {
                 chooseBudget();
                 break;
             case 2:
-                String name = ConsoleIO.promptForString("Please enter a name for your budget: ", false);
-                int amount = ConsoleIO.promptForInt("Please enter the cap for your budget:", 1, 200000000);
-                int funds = ConsoleIO.promptForInt("Please enter how much you've already spent on this budget:", 1, 200000000);
+                String name = ConsoleIO.promptForString("Enter name of budget: ", false);
+                double amount = ConsoleIO2.promptForDouble("Max amount: ", 1, 200000000);
 
-                createBudget(amount,funds,name);
+                createBudget(amount,amount,name);
                 budgetingSwitch(budgetingMenu());
                 break;
             case 3:
@@ -270,11 +273,13 @@ public class MCBudgetController {
         int choice =  ConsoleIO.promptForMenuSelection("",menu,true);
         switch (choice){
             case 1:
-                int in = ConsoleIO.promptForInt("How much money would you like to add to the total spent?",1,99999999);
+                double in = ConsoleIO2.promptForDouble("Enter how much you would like to deposit: ",1,999999999);
+                in = round(in,4);
                 contextBudget.deposit(in);
                 break;
             case 2:
-                int out = ConsoleIO.promptForInt( "How much money would you like to deduct from the total spent?",1,99999999);
+                double out = ConsoleIO2.promptForDouble( "Enter you expense costs: ",1,99999999);
+                out = round(out,2);
                 contextBudget.withdraw(out);
                 break;
             case 0:
@@ -398,5 +403,12 @@ public class MCBudgetController {
             System.out.println("Failed to save data.");
             //e.printStackTrace();
         }
+    }
+    public static double round(double value, int places) {
+        if (places < 0) throw new IllegalArgumentException();
+
+        BigDecimal bd = BigDecimal.valueOf(value);
+        bd = bd.setScale(places, RoundingMode.HALF_UP);
+        return bd.doubleValue();
     }
 }
