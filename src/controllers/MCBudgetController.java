@@ -8,6 +8,7 @@ import models.User;
 
 import java.io.IOException;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 
 public class MCBudgetController {
     private static final FileConfigurations fileConfigurations = new FileConfigurations();
@@ -15,6 +16,7 @@ public class MCBudgetController {
     static IODataModel iodataModel = new IODataModel(); //Use for saving data, and managing users.
     static UserContextController UserContextController = new UserContextController();
     static User contextUser; //current user
+    private final ArrayList<Budget> budgetList = new ArrayList<>();
 
     public static void run() {
         int choice = homeMenu();
@@ -202,11 +204,11 @@ public class MCBudgetController {
     //TODO write method
     private static void createBudget(double maxAmount, String name) {
         contextUser.addNewBudget(new Budget(maxAmount,name));
-
     }
 
     //TODO write method
     private static void savingsMenu() {
+
     }
 
     //         //
