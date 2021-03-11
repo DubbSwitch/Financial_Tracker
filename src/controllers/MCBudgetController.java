@@ -222,7 +222,6 @@ public class MCBudgetController {
     // MENUS //
     //       //
 
-
     //Finished
     private static int budgetOptionsMenu() {
         String[] menu = {"Modify Budget","View History","Rename Budget","Delete Budget"};
@@ -276,8 +275,7 @@ public class MCBudgetController {
     //Finished
     private static int accountSettingsMenu() {
         String[] menu = {"Change Display Name","Change Password","Change Change Security Question and Answer"};
-        int choice = ConsoleIO.promptForMenuSelection("Welcome to your account settings " + contextUser.getDisplayName()+ ",\n",menu,true);
-        return choice;
+        return ConsoleIO.promptForMenuSelection("Welcome to your account settings " + contextUser.getDisplayName()+ ",\n",menu,true);
     }
 
     //         //
