@@ -16,7 +16,7 @@ import java.math.RoundingMode;
 public class MCBudgetController {
     static IODataModel iodataModel = new IODataModel(); //Use for saving data, and managing users.
     static UserContextController UserContextController = new UserContextController();
-    static User contextUser; //current user
+    static User contextUser;
     static Budget contextBudget;
     static boolean closeProgram;
 
@@ -24,7 +24,7 @@ public class MCBudgetController {
         load();
         homeSwitch(homeMenu());
     }
-    //finished
+
     private static int homeMenu() {
         String[] options = {"Login", "Create New User", "Reset Password"};
         return ConsoleIO.promptForMenuSelection(" ", options, true);
@@ -55,7 +55,6 @@ public class MCBudgetController {
     //Finished
     private static void login() {
         String username = ConsoleIO.promptForString("Enter your Username: ", false);
-        // added a try catch because if their was no users created it would cause a NullPointerError
         String password = ConsoleIO.promptForString("Enter your password: ", false);
         boolean success = false;
         try {
@@ -74,7 +73,6 @@ public class MCBudgetController {
             userSwitch(choice);
         }
     }
-    //Finished
     private static void createUser() {
         String pED = "Please enter desired";
         String username = ConsoleIO.promptForString(pED + " username: ", false);
@@ -85,16 +83,13 @@ public class MCBudgetController {
         String question = ConsoleIO.promptForString("Please enter a security question for your account: ", false);
         String answer = ConsoleIO.promptForString("Please enter an answer for your security question: ", false);
         String displayName = ConsoleIO.promptForString(pED + " display name: ", false);
-        // user is a place holder strictly for testing
-        // the end of this method should create a new file with the user's information.
-        //TODO validate save
+
         System.out.println("User " + displayName + " successfully created. Please log in.");
         contextUser = new User(username, displayName, password, question, answer);
-        iodataModel.addUser(contextUser); //Make sure the user is saved
+        iodataModel.addUser(contextUser);
         save();
     }
 
-    //Finished
     private static void resetPassword() {
         String username = ConsoleIO.promptForString("Enter your username: ", false);
         try {
@@ -115,7 +110,7 @@ public class MCBudgetController {
         save();
     }
 
-    //Finished
+
     private static int userMenu() {
         String[] menu = {"Budgeting", "Account Settings", "Logout"};
         return ConsoleIO.promptForMenuSelection("Welcome "  + contextUser.getDisplayName() + ",",menu, false);
@@ -125,7 +120,6 @@ public class MCBudgetController {
     // USER //
     //      //
 
-    //Finished
     private static void userSwitch(int choice) {
         int input;
         switch (choice) {
@@ -142,13 +136,11 @@ public class MCBudgetController {
         }
     }
 
-    //Finished
     private static void logout() {
         contextUser = null;
         save();
     }
 
-    //Finished
     private static int budgetingMenu() {
         String[] menu = {"Select Budget", "Create Budget"};
         return ConsoleIO.promptForMenuSelection(" ", menu, true);
@@ -188,7 +180,6 @@ public class MCBudgetController {
 
             int input = ConsoleIO.promptForMenuSelection("Please select the budget you'd like to view:", menu, false);
             contextBudget = contextUser.getBudgetList().get(input -1);
-            //  budgetOptionsSwitch(budgetOptionsMenu(), contextUser.getBudgetList().get(input - 1));
             budgetOptionsSwitch(budgetOptionsMenu(), contextBudget);
         } catch (NullPointerException | IllegalArgumentException error){
             System.out.println("There are no budgets associated with your account");
@@ -206,31 +197,16 @@ public class MCBudgetController {
         budgetOptionsSwitch(budgetOptionsMenu(), contextBudget);
     }
 
-    /*TODO write method
-    private static void savingsMenu() {
-
-    }*/
-
-    //         //
-    // SAVINGS //
-    //         //
-
-    //TODO write method
-//    private static void modifySavingsAmount(double amount, int choice) {
-//
-//    }
-
     //       //
     // MENUS //
     //       //
 
-    //Finished
     private static int budgetOptionsMenu() {
         String[] menu = {"New Transaction","View History","Change Budget Cap","Rename Budget","Delete Budget"};
         return ConsoleIO.promptForMenuSelection(contextBudget.toString(), menu,true);
     }
 
-    //Finished
+
     private static void budgetOptionsSwitch(int choice, Budget budget) {
         switch (choice) {
             case 1:
@@ -260,8 +236,6 @@ public class MCBudgetController {
                 break;
         }
     }
-
-    //finished
     private static void modifyBudgetFundsMenu() {
         String[] menu = {"New Expense","Remove Expense"};
         int choice =  ConsoleIO.promptForMenuSelection("",menu,true);
@@ -318,7 +292,6 @@ public class MCBudgetController {
         budgetOptionsSwitch(budgetOptionsMenu(),contextBudget);
     }
 
-    //TODO write method
     private static void viewTransactionHistory(Budget budget) {
         if (budget.getFundsChangeRecord().size() > 0) {
             System.out.println("╔═══════════════════════╦════════════════════╦═══════════════════╗");
@@ -330,7 +303,6 @@ public class MCBudgetController {
                     System.out.println("╠═══════════════════════╬════════════════════╬═══════════════════╣");
                 } else {
                     System.out.println("╠═══════════════════════╩════════════════════╩═══════════════════╣");
-                    //System.out.println("╚═══════════════════════╩════════════════════╩═══════════════════╝");
                 }
             }
             String filler = "";
@@ -359,7 +331,7 @@ public class MCBudgetController {
         save();
     }
 
-    //TODO write method
+
     private static void renameBudget(Budget budget, String newName) {
         budget.setName(newName);
         int input = budgetOptionsMenu();
@@ -367,7 +339,7 @@ public class MCBudgetController {
         save();
     }
 
-    //Finished
+
     private static int accountSettingsMenu() {
         String[] menu = {"Change Display Name","Change Password","Change Security Question and Answer"};
         return ConsoleIO.promptForMenuSelection("Welcome to your account settings " + contextUser.getDisplayName(),menu,true);
@@ -388,7 +360,6 @@ public class MCBudgetController {
         return taken;
     }
 
-    //Finished
     private static void accountSettingsSwitch(int choice) {
         switch (choice){
             case 1:
@@ -418,8 +389,8 @@ public class MCBudgetController {
         }
     }
 
-    //Finished
-    private static void changeDisplayName(String newName) { // TESTED: works as intended
+
+    private static void changeDisplayName(String newName) {
         System.out.println("Display name changed to " + newName + ".");
         contextUser.setDisplayName(newName);
         save();
@@ -427,7 +398,7 @@ public class MCBudgetController {
     }
 
     //Finished
-    private static void changePassword(String newPassword) { //TESTED: works as intended
+    private static void changePassword(String newPassword) {
         System.out.println("Password changed.");
         contextUser.setPassword(newPassword);
         save();
