@@ -182,7 +182,7 @@ public class MCBudgetController {
                 userSwitch(input);
         }
     }
-    // Untested, TODO finish createBudget method
+    // Finished
     private static void chooseBudget() {
         //Creates an array containing the names of all the user's budgets, for later menu display
         try {
@@ -200,7 +200,7 @@ public class MCBudgetController {
         }
     }
 
-    //TODO write method
+    //finished
     private static void createBudget(double maxAmount, String name) {
         contextUser.addNewBudget(new Budget(maxAmount,name));
     }
@@ -249,6 +249,9 @@ public class MCBudgetController {
                     System.out.println("Incorrect password. Your budget has not been deleted.");
                     budgetOptionsSwitch(budgetOptionsMenu(), budget);
                 }
+                break;
+            case 0:
+                userSwitch(1);
                 break;
         }
     }
