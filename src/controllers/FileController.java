@@ -39,5 +39,4 @@ public class FileController {
         LocalDateTime now = LocalDateTime.now();
         return dtf.format(now) + ".bdjc";
     }
-
 }
