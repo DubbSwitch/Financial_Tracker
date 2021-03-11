@@ -107,7 +107,7 @@ public class MCBudgetController {
             } else
                 System.out.println("User '" + username + "' not found.");
         } catch (NullPointerException nfe) {
-            System.out.println("User '" + username + "' does not exist. *** TESTING = NFE has occurred.");
+            System.out.println("User '" + username + "' does not exist.");
             //run();
         }
         run();
@@ -122,7 +122,7 @@ public class MCBudgetController {
     //Finished
     private static int userMenu() {
         String[] menu = {"Budgeting", "Account Settings", "Logout"};
-        return ConsoleIO.promptForMenuSelection("Welcome "  + contextUser.getDisplayName() + ",\n",menu, false);
+        return ConsoleIO.promptForMenuSelection("Welcome "  + contextUser.getDisplayName() + ",",menu, false);
     }
 
     //      //
@@ -317,13 +317,13 @@ public class MCBudgetController {
     private static void renameBudget(Budget budget, String newName) {
         budget.setName(newName);
         int input = budgetOptionsMenu();
-        budgetOptionsSwitch(input,contextBudget);
+        budgetOptionsSwitch(input,budget);
     }
 
     //Finished
     private static int accountSettingsMenu() {
-        String[] menu = {"Change Display Name","Change Password","Change Change Security Question and Answer"};
-        return ConsoleIO.promptForMenuSelection("Welcome to your account settings " + contextUser.getDisplayName()+ ",\n",menu,true);
+        String[] menu = {"Change Display Name","Change Password","Change Security Question and Answer"};
+        return ConsoleIO.promptForMenuSelection("Welcome to your account settings " + contextUser.getDisplayName(),menu,true);
     }
 
     //         //
