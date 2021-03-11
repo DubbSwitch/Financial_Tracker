@@ -8,7 +8,6 @@ import models.User;
 
 import java.io.IOException;
 import java.nio.file.Paths;
-import java.util.ArrayList;
 
 public class MCBudgetController {
     private static final FileConfigurations fileConfigurations = new FileConfigurations();
@@ -173,8 +172,7 @@ public class MCBudgetController {
                 int amount = ConsoleIO.promptForInt("Max amount: ", 1, 200000000);
 
                 createBudget(amount,funds,name);
-                int path = budgetingMenu();
-                budgetingSwitch(path);
+                budgetingSwitch(budgetingMenu());
                 break;
             case 3:
                 savingsMenu();
@@ -237,7 +235,7 @@ public class MCBudgetController {
     private static void budgetOptionsSwitch(int choice, Budget budget) {
         switch (choice) {
             case 1:
-                modifyBudgetMenu();
+                modifyBudgetFundsMenu();
                 break;
             case 2:
                 viewTransactionHistory(budget);
@@ -262,7 +260,7 @@ public class MCBudgetController {
     }
 
     //finished
-    private static void modifyBudgetMenu() {
+    private static void modifyBudgetFundsMenu() {
         String[] menu = {"Deposit","Withdraw","Edit Maximum"};
         int choice =  ConsoleIO.promptForMenuSelection("",menu,true);
         switch (choice){

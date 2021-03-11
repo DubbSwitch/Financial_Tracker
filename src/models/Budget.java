@@ -80,8 +80,6 @@ public class Budget implements Serializable {
 
     @Override
     public String toString() {
-        String summary ="Budget: " + getName() + "\nTotal Amount: " + getBudgetAmount()
-                + "Available Funds: "+ getFunds();
-        return summary;
+        return "Budget - " + getName() + ":\n$" + getFunds() + "spent\n$" + getBudgetAmount() + " spending cap.";
     }
 }
