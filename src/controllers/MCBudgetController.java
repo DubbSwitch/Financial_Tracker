@@ -15,7 +15,6 @@ public class MCBudgetController {
     static IODataModel iodataModel = new IODataModel(); //Use for saving data, and managing users.
     static UserContextController UserContextController = new UserContextController();
     static User contextUser; //current user
-    private final ArrayList<Budget> budgetList = new ArrayList<>();
 
     public static void run() {
         int choice = homeMenu();
@@ -182,6 +181,7 @@ public class MCBudgetController {
                 userSwitch(input);
         }
     }
+
     // Finished
     private static void chooseBudget() {
         //Creates an array containing the names of all the user's budgets, for later menu display
