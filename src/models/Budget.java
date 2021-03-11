@@ -16,9 +16,10 @@ public class Budget implements Serializable {
     private double budgetAmount;
     private String name;
 
-    public Budget(double funds, String name) {
+    public Budget(double budgetAmount,double funds, String name) {
         setFunds(funds);
         setName(name);
+        setBudgetAmount(budgetAmount);
     }
 
     //TODO Maybe prevent users from going over budget????
@@ -69,8 +70,18 @@ public class Budget implements Serializable {
         this.name = name;
     }
 
+    public double getBudgetAmount() {
+        return budgetAmount;
+    }
+
+    public void setBudgetAmount(double budgetAmount) {
+        this.budgetAmount = budgetAmount;
+    }
+
     @Override
     public String toString() {
-        return super.toString();
+        String summary ="Budget: " + getName() + "\nTotal Amount: " + getBudgetAmount()
+                + "Available Funds: "+ getFunds();
+        return summary;
     }
 }
