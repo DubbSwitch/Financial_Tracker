@@ -217,9 +217,11 @@ public class MCBudgetController {
     //         //
 
     //TODO write method
-    private static void modifySavingsAmount(double amount, int choice) {
 
-    }
+
+    /*private static void modifySavingsAmount(double amount, int choice) {
+
+    }*/
 
     //       //
     // MENUS //
@@ -227,7 +229,7 @@ public class MCBudgetController {
 
     //Finished
     private static int budgetOptionsMenu() {
-        String[] menu = {"Modify Budget","View History","Rename Budget","Delete Budget"};
+        String[] menu = {"New Transaction","View History","Change Budget Cap","Rename Budget","Delete Budget"};
         return ConsoleIO.promptForMenuSelection(contextBudget.toString(), menu,true);
     }
 
@@ -241,9 +243,12 @@ public class MCBudgetController {
                 viewTransactionHistory(budget);
                 break;
             case 3:
-                renameBudget(budget, ConsoleIO.promptForString("Please enter a new name for the budget:",false));
+                modifyBudgetCapMenu();
                 break;
             case 4:
+                renameBudget(budget, ConsoleIO.promptForString("Please enter a new name for the budget:",false));
+                break;
+            case 5:
                 String response = ConsoleIO.promptForString("Warning: Deleting a budget and its full transaction history is permanent and cannot be undone.\nTo confirm deletion, please enter your password.", true);
                 if (response.equals(contextUser.getPassword())) {
                     deleteBudget(budget);
@@ -261,26 +266,31 @@ public class MCBudgetController {
 
     //finished
     private static void modifyBudgetFundsMenu() {
-        String[] menu = {"Deposit","Withdraw","Edit Maximum"};
+        String[] menu = {"New Expense","Remove Expense"};
         int choice =  ConsoleIO.promptForMenuSelection("",menu,true);
         switch (choice){
             case 1:
-                int in = ConsoleIO.promptForInt("Enter how much you would like to deposit: ",1,99999999);
+                int in = ConsoleIO.promptForInt("How much money would you like to add to the total spent?",1,99999999);
                 contextBudget.deposit(in);
                 break;
             case 2:
-                int out = ConsoleIO.promptForInt( "Enter you expense costs: ",1,99999999);
+                int out = ConsoleIO.promptForInt( "How much money would you like to deduct from the total spent?",1,99999999);
                 contextBudget.withdraw(out);
-                break;
-            case 3:
-                int max = ConsoleIO.promptForInt("Enter new Maximum: ",1,999999999);
-                contextBudget.setBudgetAmount(max);
                 break;
             case 0:
                 break;
         }
-        int input = budgetOptionsMenu();
-        budgetOptionsSwitch(input,contextBudget);
+        budgetOptionsSwitch(budgetOptionsMenu(),contextBudget);
+    }
+
+    private static void modifyBudgetCapMenu() {
+        int prompt = ConsoleIO.promptForInt("Enter a new budget cap.",1,999999999);
+        if (prompt >= contextBudget.getFunds()) {
+            contextBudget.setBudgetAmount(prompt);
+        } else {
+            System.out.println("You cannot set the budget cap lower than the current funds.");
+        }
+        budgetOptionsSwitch(budgetOptionsMenu(),contextBudget);
     }
 
     //TODO write method
