@@ -1,5 +1,7 @@
 package models;
 
+import controllers.MCBudgetController;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -64,6 +66,7 @@ public class User implements Serializable {
         }catch (NullPointerException npe){
             System.out.println("NullPointerException has been caught, this method is doing something wrong.");
         }
+        MCBudgetController.save();
     }
 
     public ArrayList<Budget> getBudgetList() { return budgetList; }

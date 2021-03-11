@@ -2,30 +2,31 @@ package controllers;
 
 import lib.ConsoleIO;
 import models.Budget;
-import models.FileConfigurations;
 import models.IODataModel;
 import models.User;
 import views.ConsoleIO2;
 
 import java.io.IOException;
+import java.io.InvalidClassException;
+import java.io.NotSerializableException;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.nio.file.Paths;
+import java.util.Locale;
 
 public class MCBudgetController {
-    private static final FileConfigurations fileConfigurations = new FileConfigurations();
     static IODataModel iodataModel = new IODataModel(); //Use for saving data, and managing users.
     static UserContextController UserContextController = new UserContextController();
     static User contextUser; //current user
     static Budget contextBudget;
+    static boolean closeProgram;
 
     public static void run() {
-        int choice = homeMenu();
-        homeSwitch(choice);
+        load();
+        homeSwitch(homeMenu());
     }
     //finished
     private static int homeMenu() {
-        String[] options = {"Login", "Create New User", "Reset Password", "Load", "Save"};
+        String[] options = {"Login", "Create New User", "Reset Password"};
         return ConsoleIO.promptForMenuSelection(" ", options, true);
     }
     private static void homeSwitch(int choice) {
@@ -39,24 +40,22 @@ public class MCBudgetController {
             case 3:
                 resetPassword();
                 break;
-            case 4:
-                load();
-                break;
-            case 5:
-                save();
-                break;
             case 0:
-                System.out.println("Goodbye");
-                break;
+                System.out.println("Goodbye.");
+                closeProgram = true;
+                return;
             default:
                 System.out.println("I don't know how you did that. Your input =" + choice);
+        }
+        if (!closeProgram) {
+            homeSwitch(homeMenu());
         }
     }
 
     //Finished
     private static void login() {
         String username = ConsoleIO.promptForString("Enter your Username: ", false);
-        // added a try catch because if their was no users created it would cause a NulLPointerError
+        // added a try catch because if their was no users created it would cause a NullPointerError
         String password = ConsoleIO.promptForString("Enter your password: ", false);
         boolean success = false;
         try {
@@ -74,12 +73,14 @@ public class MCBudgetController {
             int choice = userMenu();
             userSwitch(choice);
         }
-        else{run();}
     }
     //Finished
     private static void createUser() {
         String pED = "Please enter desired";
-        String userName = ConsoleIO.promptForString(pED + " username: ", false);
+        String username = ConsoleIO.promptForString(pED + " username: ", false);
+        while (usernameIsTaken(username)) {
+            username = ConsoleIO.promptForString("That username is unavailable. Please enter a different username.",false);
+        }
         String password = ConsoleIO.promptForString(pED + " password: ", true);
         String question = ConsoleIO.promptForString("Please enter a security question for your account: ", false);
         String answer = ConsoleIO.promptForString("Please enter an answer for your security question: ", false);
@@ -88,9 +89,9 @@ public class MCBudgetController {
         // the end of this method should create a new file with the user's information.
         //TODO validate save
         System.out.println("User " + displayName + " successfully created. Please log in.");
-        contextUser = new User(userName, displayName, password, question, answer);
+        contextUser = new User(username, displayName, password, question, answer);
         iodataModel.addUser(contextUser); //Make sure the user is saved
-        run();
+        save();
     }
 
     //Finished
@@ -109,15 +110,9 @@ public class MCBudgetController {
                 System.out.println("User '" + username + "' not found.");
         } catch (NullPointerException nfe) {
             System.out.println("User '" + username + "' does not exist.");
-            //run();
         }
-        run();
-        //checks if that user exists
-        //IF user exists
-        // Prompt their security question
-        // IF user input is true
-        // Prompt user for new password and set it as the users new password
-        //else go back to homeMenu
+
+        save();
     }
 
     //Finished
@@ -150,7 +145,7 @@ public class MCBudgetController {
     //Finished
     private static void logout() {
         contextUser = null;
-        run();
+        save();
     }
 
     //Finished
@@ -206,6 +201,7 @@ public class MCBudgetController {
     private static void createBudget(double maxAmount,double funds, String name) {
         Budget newB = new Budget(maxAmount,funds,name);
         contextUser.addNewBudget(newB);
+        iodataModel.addBudget(newB);
         contextBudget = newB;
         budgetOptionsSwitch(budgetOptionsMenu(), contextBudget);
     }
@@ -283,7 +279,7 @@ public class MCBudgetController {
                         switch (choice2){
                             case 1:
                                 contextBudget.setBudgetAmount(newMaxCap);
-                                contextBudget.setFunds(newMaxCap);
+                                contextBudget.deposit(round(in,2));
                                 break;
                             case 0:
                                 break;
@@ -309,6 +305,7 @@ public class MCBudgetController {
                 break;
         }
         budgetOptionsSwitch(budgetOptionsMenu(),contextBudget);
+        save();
     }
 
     private static void modifyBudgetCapMenu() {
@@ -358,6 +355,7 @@ public class MCBudgetController {
                 budgetingSwitch(budgetingMenu());
             }
         }
+        save();
     }
 
     //TODO write method
@@ -365,6 +363,7 @@ public class MCBudgetController {
         budget.setName(newName);
         int input = budgetOptionsMenu();
         budgetOptionsSwitch(input,budget);
+        save();
     }
 
     //Finished
@@ -376,6 +375,17 @@ public class MCBudgetController {
     //         //
     // ACCOUNT //
     //         //
+
+    private static boolean usernameIsTaken(String username) {
+        boolean taken = false;
+        for (int i = 0; i < iodataModel.getUsers().size(); i++) {
+            if (iodataModel.getUsers().get(i).getUserName().equalsIgnoreCase(username.toLowerCase())) {
+                taken = true;
+                break;
+            }
+        }
+        return taken;
+    }
 
     //Finished
     private static void accountSettingsSwitch(int choice) {
@@ -411,6 +421,7 @@ public class MCBudgetController {
     private static void changeDisplayName(String newName) { // TESTED: works as intended
         System.out.println("Display name changed to " + newName + ".");
         contextUser.setDisplayName(newName);
+        save();
         userSwitch(2); // This automatically takes the user back to the account settings menu
     }
 
@@ -418,6 +429,7 @@ public class MCBudgetController {
     private static void changePassword(String newPassword) { //TESTED: works as intended
         System.out.println("Password changed.");
         contextUser.setPassword(newPassword);
+        save();
         userSwitch(2);
     }
 
@@ -426,41 +438,52 @@ public class MCBudgetController {
         System.out.println("Security questions changed.");
         contextUser.setSecQuestion(question);
         contextUser.setSecAnswer(answer);
+        save();
         userSwitch(2);
-    }
-
-    private static void load() {
-        try {
-            iodataModel = new FileController().readDirectory(fileConfigurations);
-            run();
-        } catch (IOException | ClassNotFoundException e) {
-            e.printStackTrace();
-        }
     }
 
     //                  //
     // Data Persistence //
     //                  //
 
-    private static void save() {
-        if (fileConfigurations.getPath() != null) {
-            System.out.println("Use saved path: '" + fileConfigurations.getPath() + "'?");
-        }
-        fileConfigurations.setPath(Paths.get("SavePath"));
+    private static void load() {
         try {
-            new FileController().writeToFile(iodataModel, fileConfigurations);
-            System.out.println("Saved!");
-            run();
-        } catch (IOException e) {
-            System.out.println("Failed to save data.");
-            //e.printStackTrace();
+            iodataModel = new FileController().readDirectory();
+        } catch (IOException | ClassNotFoundException e) {
         }
     }
+
+    public static void save() {
+        try {
+            new FileController().writeToFile(iodataModel);
+        } catch (NotSerializableException nse) {
+            System.out.println("NSE");
+            nse.printStackTrace();
+        } catch (InvalidClassException ice) {
+            System.out.println("ICE");
+        } catch (IOException ioe) {
+            System.out.println("IOE");
+        }
+    }
+
+    //      //
+    // Math //
+    //      //
+
     public static double round(double value, int places) {
         if (places < 0) throw new IllegalArgumentException();
 
         BigDecimal bd = BigDecimal.valueOf(value);
         bd = bd.setScale(places, RoundingMode.HALF_UP);
         return bd.doubleValue();
+    }
+
+    //                 //
+    // Getters/Setters //
+    //                 //
+
+
+    public static IODataModel getIodataModel() {
+        return iodataModel;
     }
 }

@@ -1,5 +1,6 @@
 package models.Records;
 
+import controllers.MCBudgetController;
 import views.ConsoleIO2;
 
 import java.io.Serializable;
@@ -10,45 +11,18 @@ import java.time.format.DateTimeFormatter;
 
 public class FundsChangeRecord implements Serializable  {
     private static final long serialVersionUID = 4L;
-    private final DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MM/dd/yyyy HH:mm:ss");
+    private transient final DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MM/dd/yyyy HH:mm:ss");
     private final LocalDateTime now = LocalDateTime.now();
     private final String timestamp = dtf.format(now);
-    private final String recordID = String.valueOf(timestamp.hashCode());
     private final Double previousAvailableFundsAmount;
     private final Double newAvailableFundsAmount;
-    private final String type;
 
-    public FundsChangeRecord(Double previousAvailableFundsAmount, Double newAvailableFundsAmount, String type) {
+    public FundsChangeRecord(Double previousAvailableFundsAmount, Double newAvailableFundsAmount) {
         this.previousAvailableFundsAmount = previousAvailableFundsAmount;
         this.newAvailableFundsAmount = newAvailableFundsAmount;
-        this.type = type;
+        MCBudgetController.getIodataModel().addFundsChangeRecord(this);
+        MCBudgetController.save();
     }
-
-    public Double getNewAvailableFundsAmount() {
-        return newAvailableFundsAmount;
-    }
-
-    public Double getPreviousAvailableFundsAmount() {
-        return previousAvailableFundsAmount;
-    }
-
-    public String getRecordID() {
-        return recordID;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    /*@Override
-    public String toString() {
-        return "Funds Change Record" +
-                "\n Record ID                       : " + recordID +
-                "\n Timestamp                       : " + timestamp +
-                "\n Type                            : " + type +
-                "\n Previous Available Funds Amount : " + previousAvailableFundsAmount +
-                "\n New Available Funds Amount      : " + newAvailableFundsAmount;
-    }*/
 
     @Override
     public String toString() {

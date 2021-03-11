@@ -1,5 +1,7 @@
 package models;
 
+import models.Records.FundsChangeRecord;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -9,6 +11,7 @@ public class IODataModel implements Serializable {
     private static final long serialVersionUID = 5L;
     private final ArrayList<Budget> validBudget = new ArrayList<>();
     private final ArrayList<User> validUsers = new ArrayList<>();
+    private final ArrayList<FundsChangeRecord> validFundsChangeRecords = new ArrayList<>();
 
     public void addUser(User user) {
         validUsers.add(user);
@@ -18,6 +21,8 @@ public class IODataModel implements Serializable {
         validBudget.add(budget);
     }
 
+    public void addFundsChangeRecord(FundsChangeRecord fcr) { validFundsChangeRecords.add(fcr); }
+
     public ArrayList<Budget> getBudget() {
         return validBudget;
     }
@@ -26,11 +31,16 @@ public class IODataModel implements Serializable {
         return validUsers;
     }
 
+    public ArrayList<FundsChangeRecord> getValidFundsChangeRecords() {
+        return validFundsChangeRecords;
+    }
+
     @Override
     public String toString() {
         return "IODataModel{" +
                 "validBudget=" + validBudget +
-                ", validUsers=" + validUsers +
+                ", validBudget=" + validBudget +
+                ", validFundsChangeRecords=" + validFundsChangeRecords +
                 '}';
     }
 }

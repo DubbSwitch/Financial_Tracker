@@ -1,5 +1,6 @@
 package models;
 
+import controllers.MCBudgetController;
 import models.Records.FundsChangeRecord;
 import views.ConsoleIO2;
 
@@ -19,21 +20,23 @@ public class Budget implements Serializable {
         setFunds(funds);
         setName(name);
         setBudgetAmount(budgetAmount);
-        fundsHistory.add(new FundsChangeRecord(funds, funds, "DEPOSIT"));
+        fundsHistory.add(new FundsChangeRecord(funds, funds));
     }
 
     //TODO Maybe prevent users from going over budget????
 
     public double deposit(double amount) {
-        fundsHistory.add(new FundsChangeRecord(funds, (funds + amount), "DEPOSIT"));
+        fundsHistory.add(new FundsChangeRecord(funds, (funds + amount)));
         funds += amount;
+        MCBudgetController.save();
         return funds;
     }
 
     //TODO write method
     public double withdraw(double amount) {
-        fundsHistory.add(new FundsChangeRecord(funds, (funds - amount), "WITHDRAW"));
+        fundsHistory.add(new FundsChangeRecord(funds, (funds - amount)));
         funds -= amount;
+        MCBudgetController.save();
         return funds;
     }
 
@@ -43,6 +46,7 @@ public class Budget implements Serializable {
 
     public void setFunds(double funds) {
         this.funds = funds;
+        MCBudgetController.save();
     }
 
     public String getName() {
@@ -51,6 +55,7 @@ public class Budget implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+        MCBudgetController.save();
     }
 
     public double getBudgetAmount() {
@@ -59,6 +64,7 @@ public class Budget implements Serializable {
 
     public void setBudgetAmount(double budgetAmount) {
         this.budgetAmount = budgetAmount;
+        MCBudgetController.save();
     }
 
     public ArrayList<FundsChangeRecord> getFundsChangeRecord() {
