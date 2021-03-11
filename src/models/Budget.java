@@ -23,8 +23,8 @@ public class Budget implements Serializable {
         fundsHistory.add(new FundsChangeRecord(funds, funds));
     }
 
-    //TODO Maybe prevent users from going over budget????
 
+    //Deposit and withdraw methods change the funds amount and make a record of it
     public double deposit(double amount) {
         fundsHistory.add(new FundsChangeRecord(funds, (funds + amount)));
         funds += amount;
@@ -32,7 +32,8 @@ public class Budget implements Serializable {
         return funds;
     }
 
-    //TODO write method
+
+    //Deposit and withdraw methods change the funds amount and make a record of it
     public double withdraw(double amount) {
         fundsHistory.add(new FundsChangeRecord(funds, (funds - amount)));
         funds -= amount;

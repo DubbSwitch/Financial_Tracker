@@ -25,10 +25,13 @@ public class MCBudgetController {
         homeSwitch(homeMenu());
     }
 
+    //Methods ending in menu return an integer after prompting the player for a menu selection.
     private static int homeMenu() {
         String[] options = {"Login", "Create New User", "Reset Password"};
         return ConsoleIO.promptForMenuSelection(" ", options, true);
     }
+
+    //Methods ending in Switch take in a menu selection and choose a corresponding action.
     private static void homeSwitch(int choice) {
         switch (choice) {
             case 1:
@@ -243,6 +246,7 @@ public class MCBudgetController {
             case 1:
                 double in = round(ConsoleIO2.promptForDouble("Enter how much you would like to add to your spent total: ",-Double.MAX_VALUE,Double.MAX_VALUE),2);
                 if (in > 0) {
+                    //Prevent user from increasing spent amount beyond the max spending cap.
                     if (in + contextBudget.getFunds() <= contextBudget.getBudgetAmount()) {
                         contextBudget.deposit(round(in,2));
                     } else {
