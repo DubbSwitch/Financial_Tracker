@@ -2,6 +2,9 @@ package views;
 
 import lib.ConsoleIO;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+
 public class ConsoleIO2 extends ConsoleIO {
     public static double promptForDouble(String prompt, double min, double max) {
         if (min > max) {
@@ -26,5 +29,10 @@ public class ConsoleIO2 extends ConsoleIO {
 
             return userNum;
         }
+    }
+
+    public static String formatMoneyForDisplay(double money) {
+        BigDecimal bg1 = new BigDecimal(Double.toString(money));
+        return bg1.setScale(2, RoundingMode.FLOOR).toString();
     }
 }

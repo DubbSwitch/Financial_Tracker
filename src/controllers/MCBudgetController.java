@@ -81,12 +81,13 @@ public class MCBudgetController {
         String pED = "Please enter desired";
         String userName = ConsoleIO.promptForString(pED + " username: ", false);
         String password = ConsoleIO.promptForString(pED + " password: ", true);
-        String question = ConsoleIO.promptForString("Security Question for password reset\n" + pED + " Question: ", false);
-        String answer = ConsoleIO.promptForString(pED + " answer: ", false);
+        String question = ConsoleIO.promptForString("Please enter a security question for your account: ", false);
+        String answer = ConsoleIO.promptForString("Please enter an answer for your security question: ", false);
         String displayName = ConsoleIO.promptForString(pED + " display name: ", false);
         // user is a place holder strictly for testing
         // the end of this method should create a new file with the user's information.
         //TODO validate save
+        System.out.println("User " + displayName + " succesfully created. Please log in.");
         contextUser = new User(userName, displayName, password, question, answer);
         iodataModel.addUser(contextUser); //Make sure the user is saved
         run();
@@ -154,7 +155,7 @@ public class MCBudgetController {
 
     //Finished
     private static int budgetingMenu() {
-        String[] menu = {"Select Budget", "Create Budget", "Savings"};
+        String[] menu = {"Select Budget", "Create Budget"};
         return ConsoleIO.promptForMenuSelection(" ", menu, true);
     }
 
@@ -170,14 +171,11 @@ public class MCBudgetController {
                 chooseBudget();
                 break;
             case 2:
-                String name = ConsoleIO.promptForString("Enter name of budget: ", false);
-                double amount = ConsoleIO2.promptForDouble("Max amount: ", 1, 200000000);
+                String name = ConsoleIO.promptForString("Please enter a name for your new budget: ", false);
+                double maxAmount = ConsoleIO2.promptForDouble("Please enter the maximum spending cap for your new budget: ", 1, 200000000);
+                double funds = ConsoleIO2.promptForDouble("Please enter how much you've already spent towards this budget: ", 1, 200000000);
 
-                createBudget(amount,amount,name);
-                budgetingSwitch(budgetingMenu());
-                break;
-            case 3:
-                savingsMenu();
+                createBudget(maxAmount,funds,name);
                 break;
             case 0:
                 input = userMenu();
@@ -197,7 +195,7 @@ public class MCBudgetController {
             contextBudget = contextUser.getBudgetList().get(input -1);
             //  budgetOptionsSwitch(budgetOptionsMenu(), contextUser.getBudgetList().get(input - 1));
             budgetOptionsSwitch(budgetOptionsMenu(), contextBudget);
-        }catch (NullPointerException nfe){
+        } catch (NullPointerException | IllegalArgumentException error){
             System.out.println("There are no budgets associated with your account");
             int path = budgetingMenu();
             budgetingSwitch(path);
@@ -206,13 +204,15 @@ public class MCBudgetController {
 
     //finished
     private static void createBudget(double maxAmount,double funds, String name) {
-        contextUser.addNewBudget(new Budget(maxAmount,funds,name));
+        contextBudget = new Budget(maxAmount,funds,name);
+        contextUser.addNewBudget(contextBudget);
+        budgetOptionsSwitch(budgetOptionsMenu(), contextBudget);
     }
 
-    //TODO write method
+    /*TODO write method
     private static void savingsMenu() {
 
-    }
+    }*/
 
     //         //
     // SAVINGS //
@@ -270,14 +270,39 @@ public class MCBudgetController {
         int choice =  ConsoleIO.promptForMenuSelection("",menu,true);
         switch (choice){
             case 1:
-                double in = ConsoleIO2.promptForDouble("Enter how much you would like to deposit: ",1,999999999);
-                in = round(in,4);
-                contextBudget.deposit(in);
+                double in = round(ConsoleIO2.promptForDouble("Enter how much you would like to add to your spent total: ",-Double.MAX_VALUE,Double.MAX_VALUE),2);
+                if (in > 0) {
+                    if (in + contextBudget.getFunds() <= contextBudget.getBudgetAmount()) {
+                        contextBudget.deposit(in);
+                    } else {
+                        double newMaxCap = in + contextBudget.getFunds();
+                        String prompt = "Adding $" + in + " to your budget would bring it above your spending cap." +
+                                "\nTo increase your spent funds by $" + in + ", you must increase your spending cap to $" + newMaxCap + ".";
+                        int choice2 = ConsoleIO.promptForMenuSelection(prompt, new String[]{"Yes, increase spent funds and spending cap to $" + newMaxCap + "."}, true);
+                        switch (choice2){
+                            case 1:
+                                contextBudget.setBudgetAmount(newMaxCap);
+                                contextBudget.setFunds(newMaxCap);
+                                break;
+                            case 0:
+                                break;
+                        }
+                    }
+                } else {
+                    System.out.println("Invalid amount entered.");
+                }
                 break;
             case 2:
-                double out = ConsoleIO2.promptForDouble( "Enter you expense costs: ",1,99999999);
-                out = round(out,2);
-                contextBudget.withdraw(out);
+                double out = round(ConsoleIO2.promptForDouble("Enter how much you would like to deduct from your spent total:  ",-Double.MAX_VALUE,Double.MAX_VALUE),2);
+                if (out > 0) {
+                    if (contextBudget.getFunds() - out >= 0) {
+                        contextBudget.withdraw(out);
+                    } else {
+                        System.out.println("Error: You tried to deduct less from your budget's spent total than it contains.");
+                    }
+                } else {
+                    System.out.println("Invalid amount entered.");
+                }
                 break;
             case 0:
                 break;
@@ -340,8 +365,8 @@ public class MCBudgetController {
                 changePassword(password);
                 break;
             case 3:
-                String question = ConsoleIO.promptForString("Enter your new security question: ",false);
-                String answer = ConsoleIO.promptForString("Enter the to your new security answer: ",false);
+                String question = ConsoleIO.promptForString("Please enter a new security question: ",false);
+                String answer = ConsoleIO.promptForString("Please enter the answer to your new security question: ",false);
                 changeSecQnA(question,answer);
                 break;
             default:

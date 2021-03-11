@@ -2,6 +2,7 @@ package models;
 
 import models.Records.BudgetChangeRecord;
 import models.Records.FundsChangeRecord;
+import views.ConsoleIO2;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -80,6 +81,6 @@ public class Budget implements Serializable {
 
     @Override
     public String toString() {
-        return "Budget - " + getName() + ":\n$" + getFunds() + "spent\n$" + getBudgetAmount() + " spending cap.";
+        return "Budget - " + getName() + ": $" + ConsoleIO2.formatMoneyForDisplay(getFunds()) + " spent of $" + ConsoleIO2.formatMoneyForDisplay(getBudgetAmount()) + " spending cap.";
     }
 }
