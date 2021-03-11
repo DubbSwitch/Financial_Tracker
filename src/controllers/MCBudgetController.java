@@ -4,6 +4,7 @@ import lib.ConsoleIO;
 import models.Budget;
 import models.FileConfigurations;
 import models.IODataModel;
+import models.Records.FundsChangeRecord;
 import models.User;
 import views.ConsoleIO2;
 
@@ -11,6 +12,7 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 
 public class MCBudgetController {
     private static final FileConfigurations fileConfigurations = new FileConfigurations();
@@ -273,7 +275,7 @@ public class MCBudgetController {
                 double in = round(ConsoleIO2.promptForDouble("Enter how much you would like to add to your spent total: ",-Double.MAX_VALUE,Double.MAX_VALUE),2);
                 if (in > 0) {
                     if (in + contextBudget.getFunds() <= contextBudget.getBudgetAmount()) {
-                        contextBudget.deposit(in);
+                        contextBudget.deposit(round(in,2));
                     } else {
                         double newMaxCap = in + contextBudget.getFunds();
                         String prompt = "Adding $" + in + " to your budget would bring it above your spending cap." +
@@ -296,7 +298,7 @@ public class MCBudgetController {
                 double out = round(ConsoleIO2.promptForDouble("Enter how much you would like to deduct from your spent total:  ",-Double.MAX_VALUE,Double.MAX_VALUE),2);
                 if (out > 0) {
                     if (contextBudget.getFunds() - out >= 0) {
-                        contextBudget.withdraw(out);
+                        contextBudget.withdraw(round(out,2));
                     } else {
                         System.out.println("Error: You tried to deduct less from your budget's spent total than it contains.");
                     }
@@ -322,7 +324,31 @@ public class MCBudgetController {
 
     //TODO write method
     private static void viewTransactionHistory(Budget budget) {
-
+        if (contextBudget.getFundsChangeRecord().size() > 0) {
+            System.out.println("╔═══════════════════════╦════════════════════╦═══════════════════╗");
+            System.out.println("║     DATE AND TIME     ║       CHANGE       ║    NEW BALANCE    ║");
+            System.out.println("╠═══════════════════════╬════════════════════╬═══════════════════╣");
+            for (int i = 0; i < contextBudget.getFundsChangeRecord().size(); i++) {
+                System.out.println(contextBudget.getFundsChangeRecord().get(i).toString());
+                if (!(i + 1 == contextBudget.getFundsChangeRecord().size())) {
+                    System.out.println("╠═══════════════════════╬════════════════════╬═══════════════════╣");
+                } else {
+                    System.out.println("╠═══════════════════════╩════════════════════╩═══════════════════╣");
+                    //System.out.println("╚═══════════════════════╩════════════════════╩═══════════════════╝");
+                }
+            }
+            String filler = "";
+            String currentBalanceDisplay = ConsoleIO2.formatMoneyForDisplay(budget.getFunds());
+            for(int i = 0; i < 42 - currentBalanceDisplay.length(); i++) {
+                filler += " ";
+            }
+            System.out.println("║  " + filler + "Current Balance: $" + currentBalanceDisplay + "  ║");
+            System.out.println("╚════════════════════════════════════════════════════════════════╝\n\n");
+            budgetOptionsSwitch(budgetOptionsMenu(),contextBudget);
+        } else {
+            System.out.println("\nNo transaction history exists.\n");
+            budgetOptionsSwitch(budgetOptionsMenu(),contextBudget);
+        }
     }
 
     //TODO write method

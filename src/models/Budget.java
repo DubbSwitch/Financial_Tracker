@@ -1,6 +1,5 @@
 package models;
 
-import models.Records.BudgetChangeRecord;
 import models.Records.FundsChangeRecord;
 import views.ConsoleIO2;
 
@@ -20,6 +19,7 @@ public class Budget implements Serializable {
         setFunds(funds);
         setName(name);
         setBudgetAmount(budgetAmount);
+        fundsHistory.add(new FundsChangeRecord(funds, funds, "DEPOSIT"));
     }
 
     //TODO Maybe prevent users from going over budget????
@@ -61,8 +61,12 @@ public class Budget implements Serializable {
         this.budgetAmount = budgetAmount;
     }
 
+    public ArrayList<FundsChangeRecord> getFundsChangeRecord() {
+        return fundsHistory;
+    }
+
     @Override
     public String toString() {
-        return "Budget - " + getName() + ": $" + ConsoleIO2.formatMoneyForDisplay(getFunds()) + " spent of $" + ConsoleIO2.formatMoneyForDisplay(getBudgetAmount()) + " spending cap.";
+        return getName() + ": $" + ConsoleIO2.formatMoneyForDisplay(getFunds()) + " spent of $" + ConsoleIO2.formatMoneyForDisplay(getBudgetAmount()) + " spending cap.";
     }
 }
