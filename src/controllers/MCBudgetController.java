@@ -73,6 +73,7 @@ public class MCBudgetController {
             userSwitch(choice);
         }
     }
+
     private static void createUser() {
         String pED = "Please enter desired";
         String username = ConsoleIO.promptForString(pED + " username: ", false);
@@ -169,6 +170,7 @@ public class MCBudgetController {
                 userSwitch(input);
         }
     }
+
     // Finished
     private static void chooseBudget() {
         //Creates an array containing the names of all the user's budgets, for later menu display
@@ -205,7 +207,6 @@ public class MCBudgetController {
         String[] menu = {"New Transaction","View History","Change Budget Cap","Rename Budget","Delete Budget"};
         return ConsoleIO.promptForMenuSelection(contextBudget.toString(), menu,true);
     }
-
 
     private static void budgetOptionsSwitch(int choice, Budget budget) {
         switch (choice) {
@@ -318,7 +319,6 @@ public class MCBudgetController {
         budgetOptionsSwitch(budgetOptionsMenu(),budget);
     }
 
-    //TODO write method
     private static void deleteBudget() {
         for (int i = 0; i < contextUser.getBudgetList().size(); i++) {
             if (contextUser.getBudgetList().get(i) == contextBudget) {
@@ -330,7 +330,6 @@ public class MCBudgetController {
         budgetingSwitch(budgetingMenu());
         save();
     }
-
 
     private static void renameBudget(Budget budget, String newName) {
         budget.setName(newName);

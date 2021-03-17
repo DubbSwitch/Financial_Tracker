@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <diagram program="umlet" version="14.3.0">
-  <zoom_level>5</zoom_level>
+  <zoom_level>8</zoom_level>
   <element>
     <id>UMLPackage</id>
     <coordinates>
-      <x>345</x>
-      <y>160</y>
-      <w>360</w>
-      <h>590</h>
+      <x>568</x>
+      <y>152</y>
+      <w>576</w>
+      <h>944</h>
     </coordinates>
     <panel_attributes>controllers
 --
@@ -17,10 +17,10 @@ bg=blue</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>440</x>
-      <y>90</y>
-      <w>55</w>
-      <h>35</h>
+      <x>720</x>
+      <y>40</y>
+      <w>88</w>
+      <h>56</h>
     </coordinates>
     <panel_attributes>Main
 -
@@ -32,10 +32,10 @@ run();</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>870</x>
-      <y>165</y>
-      <w>345</w>
-      <h>230</h>
+      <x>1408</x>
+      <y>160</y>
+      <w>552</w>
+      <h>368</h>
     </coordinates>
     <panel_attributes>User
 -
@@ -71,10 +71,10 @@ run();</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>740</x>
-      <y>165</y>
-      <w>125</w>
-      <h>105</h>
+      <x>1200</x>
+      <y>160</y>
+      <w>200</w>
+      <h>168</h>
     </coordinates>
     <panel_attributes>Budget
 -
@@ -94,10 +94,10 @@ run();</panel_attributes>
   <element>
     <id>UMLPackage</id>
     <coordinates>
-      <x>730</x>
-      <y>140</y>
-      <w>515</w>
-      <h>560</h>
+      <x>1184</x>
+      <y>120</y>
+      <w>824</w>
+      <h>896</h>
     </coordinates>
     <panel_attributes>models
 --
@@ -107,10 +107,10 @@ bg=green</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>360</x>
-      <y>175</y>
-      <w>190</w>
-      <h>350</h>
+      <x>592</x>
+      <y>176</y>
+      <w>304</w>
+      <h>560</h>
     </coordinates>
     <panel_attributes>MCBudgeting
 -
@@ -169,10 +169,10 @@ layer=1</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>10</x>
-      <y>175</y>
-      <w>275</w>
-      <h>65</h>
+      <x>32</x>
+      <y>176</y>
+      <w>440</w>
+      <h>104</h>
     </coordinates>
     <panel_attributes>ConsoleIO
 -
@@ -187,10 +187,10 @@ _+promptForMenu(prompt : String, menu : String[], allowBlank : boolean) : int_</
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>55</x>
-      <y>245</y>
-      <w>170</w>
-      <h>50</h>
+      <x>104</x>
+      <y>288</y>
+      <w>272</w>
+      <h>80</h>
     </coordinates>
     <panel_attributes>FileIO
 -
@@ -204,10 +204,10 @@ _+readTextFromFile(filePath : String) : String_
   <element>
     <id>UMLPackage</id>
     <coordinates>
-      <x>0</x>
-      <y>160</y>
-      <w>295</w>
-      <h>210</h>
+      <x>16</x>
+      <y>152</y>
+      <w>472</w>
+      <h>336</h>
     </coordinates>
     <panel_attributes>views
 --
@@ -217,10 +217,10 @@ bg=red</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>5</x>
-      <y>305</y>
-      <w>275</w>
-      <h>45</h>
+      <x>24</x>
+      <y>384</y>
+      <w>440</w>
+      <h>72</h>
     </coordinates>
     <panel_attributes>ConsoleIO2
 -
@@ -234,10 +234,10 @@ _+promptForDouble(prompt : String, min : double, max : double) : double_
   <element>
     <id>UMLPackage</id>
     <coordinates>
-      <x>415</x>
-      <y>70</y>
-      <w>110</w>
-      <h>75</h>
+      <x>680</x>
+      <y>8</y>
+      <w>176</w>
+      <h>120</h>
     </coordinates>
     <panel_attributes>prog
 --
@@ -247,10 +247,10 @@ bg=orange</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>745</x>
-      <y>625</y>
-      <w>170</w>
-      <h>65</h>
+      <x>1208</x>
+      <y>896</y>
+      <w>272</w>
+      <h>104</h>
     </coordinates>
     <panel_attributes>FileConfigurations
 -
@@ -264,10 +264,10 @@ _-final serialVersionUID = 4L; : long_
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>350</x>
-      <y>675</y>
-      <w>225</w>
-      <h>60</h>
+      <x>576</x>
+      <y>976</y>
+      <w>360</w>
+      <h>96</h>
     </coordinates>
     <panel_attributes>FileController
 -
@@ -282,10 +282,10 @@ _-final serialVersionUID = 4L; : long_
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>930</x>
-      <y>495</y>
-      <w>300</w>
-      <h>125</h>
+      <x>1504</x>
+      <y>688</y>
+      <w>480</w>
+      <h>200</h>
     </coordinates>
     <panel_attributes>FundsChangeRecord
 -
@@ -308,10 +308,10 @@ _-final toFundsAvailable :double_
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>350</x>
-      <y>575</y>
-      <w>205</w>
-      <h>40</h>
+      <x>576</x>
+      <y>816</y>
+      <w>328</w>
+      <h>64</h>
     </coordinates>
     <panel_attributes>UserContextController
 -
@@ -323,10 +323,10 @@ _-final toFundsAvailable :double_
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>740</x>
-      <y>525</y>
-      <w>185</w>
-      <h>85</h>
+      <x>1200</x>
+      <y>736</y>
+      <w>296</w>
+      <h>136</h>
     </coordinates>
     <panel_attributes>IODataModel
 -
@@ -344,10 +344,10 @@ _-final validUsers = new ArrayList&lt;&gt;(); : ArrayList&lt;User&gt;_
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>350</x>
-      <y>620</y>
-      <w>275</w>
-      <h>50</h>
+      <x>576</x>
+      <y>888</y>
+      <w>440</w>
+      <h>80</h>
     </coordinates>
     <panel_attributes>ObjectIO
 -
@@ -360,10 +360,10 @@ _-final validUsers = new ArrayList&lt;&gt;(); : ArrayList&lt;User&gt;_
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>455</x>
-      <y>120</y>
-      <w>15</w>
-      <h>65</h>
+      <x>744</x>
+      <y>88</y>
+      <w>24</w>
+      <h>104</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
     <additional_attributes>10.0;110.0;10.0;10.0</additional_attributes>
@@ -371,10 +371,10 @@ _-final validUsers = new ArrayList&lt;&gt;(); : ArrayList&lt;User&gt;_
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>545</x>
-      <y>265</y>
-      <w>260</w>
-      <h>190</h>
+      <x>888</x>
+      <y>320</y>
+      <w>416</w>
+      <h>304</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
     <additional_attributes>10.0;360.0;500.0;360.0;500.0;10.0</additional_attributes>
@@ -382,10 +382,10 @@ _-final validUsers = new ArrayList&lt;&gt;(); : ArrayList&lt;User&gt;_
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>275</x>
-      <y>210</y>
-      <w>60</w>
-      <h>130</h>
+      <x>456</x>
+      <y>232</y>
+      <w>96</w>
+      <h>208</h>
     </coordinates>
     <panel_attributes>lt=.
 </panel_attributes>
@@ -394,10 +394,10 @@ _-final validUsers = new ArrayList&lt;&gt;(); : ArrayList&lt;User&gt;_
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>220</x>
-      <y>260</y>
-      <w>145</w>
-      <h>20</h>
+      <x>368</x>
+      <y>312</y>
+      <w>232</w>
+      <h>32</h>
     </coordinates>
     <panel_attributes>lt=&lt;.
 &lt;&lt;instanceOf&gt;&gt;</panel_attributes>
@@ -406,10 +406,10 @@ _-final validUsers = new ArrayList&lt;&gt;(); : ArrayList&lt;User&gt;_
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>570</x>
-      <y>620</y>
-      <w>185</w>
-      <h>85</h>
+      <x>928</x>
+      <y>888</y>
+      <w>296</w>
+      <h>136</h>
     </coordinates>
     <panel_attributes>lt=-</panel_attributes>
     <additional_attributes>10.0;150.0;210.0;150.0;210.0;10.0;260.0;10.0;260.0;80.0;350.0;80.0</additional_attributes>
@@ -417,10 +417,10 @@ _-final validUsers = new ArrayList&lt;&gt;(); : ArrayList&lt;User&gt;_
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>620</x>
-      <y>440</y>
-      <w>65</w>
-      <h>195</h>
+      <x>1008</x>
+      <y>600</y>
+      <w>104</w>
+      <h>312</h>
     </coordinates>
     <panel_attributes>lt=-</panel_attributes>
     <additional_attributes>110.0;10.0;110.0;370.0;10.0;370.0</additional_attributes>
@@ -428,10 +428,10 @@ _-final validUsers = new ArrayList&lt;&gt;(); : ArrayList&lt;User&gt;_
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>550</x>
-      <y>440</y>
-      <w>60</w>
-      <h>160</h>
+      <x>896</x>
+      <y>600</y>
+      <w>96</w>
+      <h>256</h>
     </coordinates>
     <panel_attributes>lt=-</panel_attributes>
     <additional_attributes>100.0;10.0;100.0;300.0;10.0;300.0</additional_attributes>
@@ -439,10 +439,10 @@ _-final validUsers = new ArrayList&lt;&gt;(); : ArrayList&lt;User&gt;_
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>790</x>
-      <y>440</y>
-      <w>315</w>
-      <h>20</h>
+      <x>1280</x>
+      <y>600</y>
+      <w>504</w>
+      <h>32</h>
     </coordinates>
     <panel_attributes>lt=-</panel_attributes>
     <additional_attributes>10.0;10.0;610.0;20.0</additional_attributes>
@@ -450,10 +450,10 @@ _-final validUsers = new ArrayList&lt;&gt;(); : ArrayList&lt;User&gt;_
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1090</x>
-      <y>385</y>
-      <w>15</w>
-      <h>120</h>
+      <x>1760</x>
+      <y>512</y>
+      <w>24</w>
+      <h>192</h>
     </coordinates>
     <panel_attributes>lt=-</panel_attributes>
     <additional_attributes>10.0;10.0;10.0;220.0</additional_attributes>
