@@ -241,11 +241,11 @@ public class MCBudgetController {
         }
     }
     private static void modifyBudgetFundsMenu() {
-        String[] menu = {"New Expense","Remove Expense"};
+        String[] menu = {"Add To Budget","Subtract From Budget"};
         int choice =  ConsoleIO.promptForMenuSelection("",menu,true);
         switch (choice){
             case 1:
-                double in = round(ConsoleIO2.promptForDouble("Enter how much you would like to add to your spent total: ",-Double.MAX_VALUE,Double.MAX_VALUE),2);
+                double in = round(ConsoleIO2.promptForDouble("Enter how much you would like to add/deposit to your budget total: ",-Double.MAX_VALUE,Double.MAX_VALUE),2);
                 if (in > 0) {
                     //Prevent user from increasing spent amount beyond the max spending cap.
                     if (in + contextBudget.getFunds() <= contextBudget.getBudgetAmount()) {
@@ -253,8 +253,8 @@ public class MCBudgetController {
                     } else {
                         double newMaxCap = in + contextBudget.getFunds();
                         String prompt = "Adding $" + in + " to your budget would bring it above your spending cap." +
-                                "\nTo increase your spent funds by $" + in + ", you must increase your spending cap to $" + newMaxCap + ".";
-                        int choice2 = ConsoleIO.promptForMenuSelection(prompt, new String[]{"Yes, increase spent funds and spending cap to $" + newMaxCap + "."}, true);
+                                "\nTo increase your budget funds by $" + in + ", you must increase your spending cap to $" + newMaxCap + ".";
+                        int choice2 = ConsoleIO.promptForMenuSelection(prompt, new String[]{"Yes, increase budget funds and spending cap to $" + newMaxCap + "."}, true);
                         switch (choice2){
                             case 1:
                                 contextBudget.setBudgetAmount(newMaxCap);
@@ -269,7 +269,7 @@ public class MCBudgetController {
                 }
                 break;
             case 2:
-                double out = round(ConsoleIO2.promptForDouble("Enter how much you would like to deduct from your spent total:  ",-Double.MAX_VALUE,Double.MAX_VALUE),2);
+                double out = round(ConsoleIO2.promptForDouble("Enter how much you would like to deduct/spend from your budget total:  ",-Double.MAX_VALUE,Double.MAX_VALUE),2);
                 if (out > 0) {
                     if (contextBudget.getFunds() - out >= 0) {
                         contextBudget.withdraw(round(out,2));
