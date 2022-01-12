@@ -6,6 +6,8 @@
     <JAVADOC />
     <SOURCES>
       <root url="jar://$PROJECT_DIR$/src/views/ConsoleIO.jar!/" />
+      <root url="file://$PROJECT_DIR$/src" />
+      <root url="jar://$PROJECT_DIR$/src/views/ConsoleIO.jar!/" />
     </SOURCES>
   </library>
 </component>

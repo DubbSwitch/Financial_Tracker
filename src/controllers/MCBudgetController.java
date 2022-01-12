@@ -309,11 +309,9 @@ public class MCBudgetController {
                     System.out.println("╠═══════════════════════╩════════════════════╩═══════════════════╣");
                 }
             }
-            String filler = "";
+            StringBuilder filler = new StringBuilder();
             String currentBalanceDisplay = ConsoleIO2.formatMoneyForDisplay(budget.getFunds());
-            for(int i = 0; i < 42 - currentBalanceDisplay.length(); i++) {
-                filler += " ";
-            }
+            filler.append(" ".repeat(Math.max(0, 42 - currentBalanceDisplay.length())));
             System.out.println("║  " + filler + "Current Balance: $" + currentBalanceDisplay + "  ║");
             System.out.println("╚════════════════════════════════════════════════════════════════╝\n\n");
         } else {
@@ -423,7 +421,7 @@ public class MCBudgetController {
     private static void load() {
         try {
             iodataModel = new FileController().readDirectory();
-        } catch (IOException | ClassNotFoundException e) {
+        } catch (IOException | ClassNotFoundException ignored) {
         }
     }
 
