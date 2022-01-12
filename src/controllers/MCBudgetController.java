@@ -12,7 +12,6 @@ import java.io.NotSerializableException;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
-
 public class MCBudgetController {
     static IODataModel iodataModel = new IODataModel(); //Use for saving data, and managing users.
     static UserContextController UserContextController = new UserContextController();
